@@ -1,0 +1,26 @@
+import Recipe from './Recipe.interface';
+
+export default interface Week {
+    name: string,
+    mondayB: Recipe,
+    mondayL: Recipe,
+    mondayD: Recipe,
+    tuesdayB: Recipe,
+    tuesdayL: Recipe,
+    tuesdayD: Recipe,
+    wednesdayB: Recipe,
+    wednesdayL: Recipe,
+    wednesdayD: Recipe,
+    thursdayB: Recipe,
+    thursdayL: Recipe,
+    thursdayD: Recipe,
+    fridayB: Recipe,
+    fridayL: Recipe,
+    fridayD: Recipe,
+    saturdayB: Recipe,
+    saturdayL: Recipe,
+    saturdayD: Recipe,
+    sundayB: Recipe,
+    sundayL: Recipe,
+    sundayD: Recipe,
+}
