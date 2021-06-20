@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import Routes from './config/Routes';
-import User from './models/User.interface'
+import User from './models/User.interface';
+import Header from './components/Header';
 
 import './App.css';
 
@@ -18,6 +19,7 @@ class App extends React.Component<{}, State> {
   render(): JSX.Element {
     return (
       <Router>
+        <Header />
         <Routes />
       </Router>
     );

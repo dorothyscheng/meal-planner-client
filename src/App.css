@@ -1,10 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Homemade+Apple&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Hind Siliguri', sans-serif;
 }
 body {
   background-color: #f2e8cf;
+}
+a {
+  text-decoration: none;
+}
+header {
+  background-color: #6a994e;
+  color: #f2e8cf;
+  height: 5rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.main-title {
+  font-family: 'Homemade Apple', cursive;
+  color: #f2e8cf;
+}
+nav {
+  width: 30%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.nav-link {
+  color: #f2e8cf;
+  font-size: 20px;
+}
+.nav-link:focus {
+  font-weight: 600;
 }
 .query-card {
   border: 1px solid black;
