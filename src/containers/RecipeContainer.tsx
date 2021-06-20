@@ -61,7 +61,9 @@ class RecipeContainer extends React.Component<RouteComponentProps, State> {
             <div>
                 <h1>Showing recipes {this.state.from} to {this.state.to} of {this.state.total}</h1>
                 <p onClick={() => this.fetchRecipeNext(this.state.next)}>Next page</p>
-                { recipeCards }
+                <div className="card-container recipe-container">
+                    { recipeCards }
+                </div>
             </div>
         );
     }

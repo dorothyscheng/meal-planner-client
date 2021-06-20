@@ -8,7 +8,7 @@ interface queryOption {
 }
 
 const QueryCard = (props: queryOption): JSX.Element => {
-    const link = '/recipes?' + props.parameter + '=' + props.query;
+    const link = '/recipes?' + props.parameter + '=' + props.query + '&health=alcohol-free';
     const style: CSS.Properties = {
         backgroundImage: `url(${props.image})`,
     }
