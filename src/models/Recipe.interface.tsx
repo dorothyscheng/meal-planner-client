@@ -80,10 +80,10 @@ export interface RecipeLong {
         totalDaily?: nutrientObj,
         digest?: digest,
     },
-    _links?: {
-        self?: {
-            href?: string,
-            title?: string,
+    _links: {
+        self: {
+            href: string,
+            title: string,
         },
     },
 }
