@@ -38,9 +38,9 @@ class RecipeShow extends React.Component<RouteComponentProps<recipeParams>, Stat
                 </div>
             )
         }
-        const ingredientList = this.state.recipe.ingredientLines?.map(ingredient => <li><i className="fas fa-utensil-spoon"></i>{ingredient}</li>);
-        const dietLabels = this.state.recipe.dietLabels?.map(label => <div className="label">{label}</div>);
-        const healthLabels = this.state.recipe.healthLabels?.map(label => <div className="label">{label}</div>);
+        const ingredientList = this.state.recipe.ingredientLines?.map((ingredient, idx) => <li key={idx} ><i className="fas fa-utensil-spoon"></i>{ingredient}</li>);
+        const dietLabels = this.state.recipe.dietLabels?.map((label, idx) => <div key={idx} className="label">{label}</div>);
+        const healthLabels = this.state.recipe.healthLabels?.map((label, idx) => <div key={idx} className="label">{label}</div>);
         return (
             <div className="recipe-show-container">
                 <img className="recipe-show-img" src={this.state.recipe.image} alt={this.state.recipe.label} />
