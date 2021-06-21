@@ -80,7 +80,7 @@ class LoginModal extends React.Component<Props, State> {
             <div className="modal-container" style={style} onClick={this.handleClose}>
                 <div className="modal-content">
                     <form className="form">
-                        <h1>Welcome back!</h1>
+                        <h1>Hi again!</h1>
                         { this.props.error && <h3>Authentication failed</h3>}
                         <label htmlFor="username">Username:</label>
                         <input 

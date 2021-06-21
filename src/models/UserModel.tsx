@@ -18,6 +18,11 @@ class UserModel {
         const response: AxiosResponse = await axios.post<User>(endPoint, user);
         return response.data;
     }
+
+    static show = async (username: User['username']): Promise<User | errorMessage> => {
+        const response: AxiosResponse = await axios.get<User>(`${endPoint}/${username}`);
+        return response.data;
+    }
 }
 
 export default UserModel;

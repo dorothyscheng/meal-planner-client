@@ -23,7 +23,8 @@ class Header extends React.Component<Props, {}> {
     render(): JSX.Element {
         const protectedLinks = (
             <>
-                <Link className="nav-link" to="/">Dashboard</Link>
+                <Link className="nav-link" to="/recipes">Recipes</Link>
+                <Link className="nav-link" to="/dashboard">Dashboard</Link>
                 <Link className="nav-link" to="/" onClick={this.props.handleLogout}>Logout</Link>
             </>
         )

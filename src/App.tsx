@@ -99,6 +99,29 @@ class App extends React.Component<{}, State> {
     });
   }
 
+  fetchUserData = (username: User['username']): void => {
+    UserModel.show(username)
+      .then(response => {
+        if (this.isError(response)) {
+          this.setState({
+            error: response.message,
+          });
+        } else {
+          this.setState({
+            user: response,
+            error: null,
+          });
+        };
+      });
+  }
+
+  componentDidMount() {
+    const username = localStorage.getItem('auth');
+    if (username) {
+      this.fetchUserData(username);
+    };
+  }
+
   render(): JSX.Element {
     return (
       <div className="page-container">
@@ -115,7 +138,7 @@ class App extends React.Component<{}, State> {
               showSignup={this.showSignup}
               hideSignup={this.hideSignup}
               handleSignup={this.handleSignup} />
-            <Routes />
+            <Routes user={this.state.user} />
           </Router>
         </div>
         <Footer />

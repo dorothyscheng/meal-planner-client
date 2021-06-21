@@ -51,7 +51,9 @@ class RecipeContainer extends React.Component<RouteComponentProps, State> {
 
     componentDidMount() {
         const query = this.props.location.search.slice(1);
-        this.fetchRecipeQuery(query);
+        if (query) {
+            this.fetchRecipeQuery(query);
+        }
     }
 
     render(): JSX.Element {
