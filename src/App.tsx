@@ -5,6 +5,7 @@ import Routes from './config/Routes';
 import User, { UserLogin } from './models/User.interface';
 import UserModel from './models/UserModel';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 import './App.css';
 
@@ -100,20 +101,25 @@ class App extends React.Component<{}, State> {
 
   render(): JSX.Element {
     return (
-      <Router>
-        <Header 
-          displayLoginModal={this.state.displayLoginModal} 
-          showLogin={this.showLogin} 
-          hideLogin={this.hideLogin} 
-          handleLogin={this.handleLogin}
-          error={this.state.error}
-          handleLogout={this.handleLogout}
-          displaySignupModal={this.state.displaySignupModal}
-          showSignup={this.showSignup}
-          hideSignup={this.hideSignup}
-          handleSignup={this.handleSignup} />
-        <Routes />
-      </Router>
+      <div className="page-container">
+        <div className="page-content">
+          <Router>
+            <Header 
+              displayLoginModal={this.state.displayLoginModal} 
+              showLogin={this.showLogin} 
+              hideLogin={this.hideLogin} 
+              handleLogin={this.handleLogin}
+              error={this.state.error}
+              handleLogout={this.handleLogout}
+              displaySignupModal={this.state.displaySignupModal}
+              showSignup={this.showSignup}
+              hideSignup={this.hideSignup}
+              handleSignup={this.handleSignup} />
+            <Routes />
+          </Router>
+        </div>
+        <Footer />
+      </div>
     );
   }
 }

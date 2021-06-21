@@ -29,6 +29,13 @@ label {
   font-weight: 500;
   margin-top: 10px;
 }
+.page-container {
+  position: relative;
+  min-height: 100vh;
+}
+.page-content {
+  padding-bottom: 4rem;
+}
 /* CARD CONTAINERS */
 .card-container {
   display: flex;
@@ -99,6 +106,7 @@ label {
   margin: 0 auto;
   justify-content: center;
   align-items: flex-start;
+  margin-top: 50px;
 }
 .recipe-show-content {
   margin-left: 20px;
@@ -131,14 +139,13 @@ header {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 50px;
 }
 .main-title {
   font-family: 'Homemade Apple', cursive;
   color: #fff;
 }
 nav {
-  width: 30%;
+  width: 25%;
   display: flex;
   justify-content: space-evenly;
 }
@@ -148,12 +155,34 @@ nav {
   cursor: pointer;
 }
 
+/* FOOTER */
+footer {
+  background-color: #6a994e;
+  height: 3rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
 /* HOME */
-.home-text {
-  height: 50vh;
+.home-title-div {
+  height: 40vh;
   display: flex;
   align-items: center;
+  justify-content: center;
+  background-image: url('https://images.unsplash.com/photo-1435527173128-983b87201f4d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1047&q=80');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-bottom: 50px;
+}
+.home-title {
   padding: 20px;
+  background-color: rgba(188,71,73,.7);
+}
+.home-text {
+  width: 90%;
+  margin: 0 auto;
+  font-size: 18px;
 }
 .query-card-link {
   width: 20%;
@@ -191,6 +220,12 @@ nav {
 }
 .query-title {
   color: #fff;
+}
+.section-title {
+  font-family: 'Homemade Apple', cursive;
+  color: #000;
+  text-align: center;
+  margin-top: 50px;
 }
 /* RECIPE INDEX */
 .recipe-container {
