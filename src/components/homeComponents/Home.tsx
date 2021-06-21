@@ -23,7 +23,7 @@ const Home = (): JSX.Element => {
     return (
         <>
             <div className="home-title-div">
-                <h1 className="main-title home-title">Here to help you get organized and eat healthy!</h1>
+                <h1 className="main-title home-title">Here to help you get and stay organized!</h1>
             </div>
             <div className="home-text">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec consequat diam, quis efficitur eros. Nullam massa tortor, ultricies eget massa ac, molestie vestibulum orci. Ut semper justo ut mattis vulputate. Duis id iaculis nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec aliquam tellus. Vivamus pellentesque felis odio, vel cursus nulla malesuada non. Fusce volutpat, ligula et mattis posuere, dui tellus vehicula nulla, id cursus lacus tellus vel neque. Phasellus quis nisl vitae erat dapibus ornare. Donec pharetra feugiat leo, sit amet gravida massa feugiat quis. Nam ornare luctus volutpat. Morbi tristique velit non ligula laoreet iaculis. Aenean egestas molestie urna. Ut suscipit ligula placerat nunc placerat gravida. Phasellus hendrerit urna in neque bibendum placerat. Donec mattis, arcu id malesuada finibus, nunc elit elementum enim, a sagittis orci nisi ac nisl.

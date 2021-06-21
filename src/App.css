@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Homemade+Apple&display=swap');
 
-/* RESET */
+/* SITE-WIDE */
 * {
   margin: 0;
   padding: 0;
@@ -34,7 +34,7 @@ label {
   min-height: 100vh;
 }
 .page-content {
-  padding-bottom: 4rem;
+  padding-bottom: 6rem;
 }
 /* CARD CONTAINERS */
 .card-container {
@@ -137,8 +137,15 @@ header {
   background-color: #6a994e;
   height: 5rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+}
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+
 }
 .main-title {
   font-family: 'Homemade Apple', cursive;
@@ -158,10 +165,14 @@ nav {
 /* FOOTER */
 footer {
   background-color: #6a994e;
-  height: 3rem;
+  height: 5rem;
   position: absolute;
   bottom: 0;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
 }
 
 /* HOME */
@@ -226,6 +237,7 @@ footer {
   color: #000;
   text-align: center;
   margin-top: 50px;
+  margin-bottom: 20px;
 }
 /* RECIPE INDEX */
 .recipe-container {

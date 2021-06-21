@@ -48,10 +48,12 @@ class Header extends React.Component<Props, {}> {
         const auth = localStorage.getItem('auth');
         return (
             <header>
-                <Link to="/"><h1 className="main-title">Meal Planner</h1></Link>
-                <nav>
-                    { auth ? protectedLinks : loginLinks }
-                </nav>
+                <div className="header-content">
+                    <Link to="/"><h1 className="main-title">Meal Planner</h1></Link>
+                    <nav>
+                        { auth ? protectedLinks : loginLinks }
+                    </nav>
+                </div>
             </header>
         );
     }
