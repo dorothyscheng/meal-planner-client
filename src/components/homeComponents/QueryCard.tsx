@@ -16,7 +16,7 @@ const QueryCard = (props: queryOption): JSX.Element => {
         <Link className="query-card-link" to={link}>
             <div className="query-container">
                 <div className="card query-card" style={style}>
-                    {/* <h2 className="query-title">{props.query.toUpperCase()}</h2> */}
+                    <h2 className="query-title">{props.query.toUpperCase()}</h2>
                 </div>
                 <div className="query-overlay">
                     <h2 className="query-title">{props.query.toUpperCase()}</h2>

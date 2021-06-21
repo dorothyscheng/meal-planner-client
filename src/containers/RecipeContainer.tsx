@@ -37,7 +37,7 @@ class RecipeContainer extends React.Component<RouteComponentProps, State> {
     }
 
     fetchRecipeNext = (url: string): void => {
-        RecipeModel.show(url)
+        RecipeModel.next(url)
             .then(response => {
                 this.setState({
                     recipes: response.hits,

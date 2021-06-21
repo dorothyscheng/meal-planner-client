@@ -7,14 +7,13 @@
   box-sizing: border-box;
   font-family: 'Hind Siliguri', sans-serif;
 }
-body {
-  background-color: #f2e8cf;
-}
 a {
   text-decoration: none;
 }
-
-/* CONTAINERS */
+ul {
+  list-style: none;
+}
+/* CARD CONTAINERS */
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -26,13 +25,46 @@ a {
   height: 200px;
 }
 
+/* RECIPE SHOW */
+.recipe-show-container {
+  width: 90%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: flex-start;
+}
+.recipe-show-content {
+  margin-left: 20px;
+  width: 50%;
+}
+.ingredient-list {
+  font-size: 18px;
+}
+.fa-utensil-spoon {
+  margin-right: 10px;
+  /* color: #bc4749; */
+}
+.labels-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.label {
+  background-color: #386641;
+  color: #fff;
+  margin: 5px;
+  padding: 5px;
+}
+
 /* HEADER */
 header {
-  background-color: #386641;
+  background-color: #6a994e;
   height: 5rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-bottom: 50px;
 }
 .main-title {
   font-family: 'Homemade Apple', cursive;
@@ -66,10 +98,11 @@ nav {
   width: 100%;
 }
 .query-card {
-  /* display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px; */
+  font-size: 30px;
+  -webkit-text-stroke: 1px #000;
   background-position: center;
   background-size: cover;
   position: relative;
@@ -93,7 +126,6 @@ nav {
 }
 .query-title {
   color: #fff;
-  /* -webkit-text-stroke: 1px #000; */
 }
 /* RECIPE INDEX */
 .recipe-container {
@@ -107,8 +139,6 @@ nav {
   transition: all .3s;
 }
 .recipe-card {
-  /* border: 1px solid black; */
-  /* border-radius: 5px; */
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -117,17 +147,13 @@ nav {
   object-fit: cover;
 }
 .recipe-title {
-  /* background-color: rgba(56, 102, 65,.7); */
   background-color: rgba(255,255,255,.7);
   width: 100%;
   min-height: fit-content;
   height: 35%;
   padding: 10px;
   text-align: center;
-  /* color: #fff; */
   color: black;
-  /* border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px; */
 }
 .recipe-card-link:hover {
   transform: scale(1.1);
