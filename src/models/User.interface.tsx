@@ -8,7 +8,7 @@ export default interface User {
     password: string,
     email: string,
     familySize?: number,
-    lists: string[],
-    weeks: string[],
+    lists?: string[],
+    weeks?: string[],
     _id?: string,
 }

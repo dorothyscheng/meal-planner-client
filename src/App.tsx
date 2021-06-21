@@ -15,6 +15,7 @@ interface errorMessage {
 interface State {
    user: User | null,
    displayLoginModal: boolean,
+   displaySignupModal: boolean,
    error: string | null,
 }
 
@@ -22,7 +23,42 @@ class App extends React.Component<{}, State> {
   state: State = {
     user: null,
     displayLoginModal: false,
+    displaySignupModal: false,
     error: null,
+  }
+
+  isError = (response: errorMessage | User): response is errorMessage => {
+    return (response as errorMessage).message !== undefined;
+  }
+  
+  showSignup = (): void => {
+    this.setState({
+        displaySignupModal: true,
+    });
+  }
+
+  hideSignup = (): void => {
+      this.setState({
+          displaySignupModal: false,
+      });
+  }
+
+  handleSignup = (user: User): void => {
+    UserModel.create(user)
+      .then(response => {
+        if (this.isError(response)) {
+          this.setState({
+            error: response.message,
+          });
+        } else {
+          this.setState({
+            user: response,
+            error: null,
+          });
+          localStorage.setItem('auth', response.username);
+          this.hideSignup();
+        }
+      });
   }
 
   showLogin = (): void => {
@@ -37,10 +73,6 @@ class App extends React.Component<{}, State> {
       });
   }
 
-  isError = (response: errorMessage | User): response is errorMessage => {
-    return (response as errorMessage).message !== undefined;
-  }
-
   handleLogin = (user: UserLogin): void => {
     UserModel.login(user)
       .then(response => {
@@ -53,8 +85,17 @@ class App extends React.Component<{}, State> {
             user: response,
             error: null,
           });
+          localStorage.setItem('auth', response.username);
+          this.hideLogin();
         }
       });
+  }
+
+  handleLogout = (): void => {
+    localStorage.clear();
+    this.setState({
+      user: null,
+    });
   }
 
   render(): JSX.Element {
@@ -65,7 +106,12 @@ class App extends React.Component<{}, State> {
           showLogin={this.showLogin} 
           hideLogin={this.hideLogin} 
           handleLogin={this.handleLogin}
-          error={this.state.error} />
+          error={this.state.error}
+          handleLogout={this.handleLogout}
+          displaySignupModal={this.state.displaySignupModal}
+          showSignup={this.showSignup}
+          hideSignup={this.hideSignup}
+          handleSignup={this.handleSignup} />
         <Routes />
       </Router>
     );

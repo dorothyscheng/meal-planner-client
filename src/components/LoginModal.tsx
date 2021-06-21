@@ -57,7 +57,7 @@ class LoginModal extends React.Component<Props, State> {
         };
     }
 
-    handleSubmit = (e: React.MouseEvent) => {
+    handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         this.props.handleLogin(this.state);
         this.setState({
@@ -75,8 +75,7 @@ class LoginModal extends React.Component<Props, State> {
                 display: 'block',
             }
         };
-        const passwordArr = this.state.password.split('');
-        const passwordDisplay = passwordArr.map(char => '*').join('');
+        const passwordDisplay = this.state.password.split('').map(char => '*').join('');
         return (
             <div className="modal-container" style={style} onClick={this.handleClose}>
                 <div className="modal-content">
