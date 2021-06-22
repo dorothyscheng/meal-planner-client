@@ -1,13 +1,25 @@
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+
+import { Redirect } from 'react-router-dom';
 import CSS from 'csstype';
 
 import { RecipeLong } from '../../models/Recipe.interface';
 
 interface Props {
-    recipe: RecipeLong
+    recipe: RecipeLong,
+    showListListModal: (recipe: RecipeLong) => void,
 }
 
 const RecipeCard = (props: Props): JSX.Element => {
+    const [redirect, setRedirect] = useState(false);
+
+    const redirectLink = (e: React.MouseEvent): void => {
+        const target = e.target as Element;
+        if (target.className === 'card recipe-card') {
+            setRedirect(true);
+        };
+    };
+
     const style: CSS.Properties = {
         backgroundImage: `url(${props.recipe.recipe.image})`,
     }
@@ -19,12 +31,14 @@ const RecipeCard = (props: Props): JSX.Element => {
     } else {
         recipeId = recipeIdArr[1];
     };
+    if (redirect) return <Redirect to={`/recipes/${recipeId}`} />
     return (
-        <Link className="recipe-card-link" to={`/recipes/${recipeId}`}>
+        <div className="recipe-card-link" onClick={redirectLink}>
             <div className="card recipe-card" style={style}>
                 <h3 className="recipe-title">{props.recipe.recipe.label}</h3>
+                { props.showListListModal && <i className="fas fa-plus-circle" onClick={() => props.showListListModal(props.recipe)}></i> }
             </div>
-        </Link>
+        </div>
     );
 };
 

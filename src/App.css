@@ -124,7 +124,6 @@ label {
 }
 .fa-utensil-spoon {
   margin-right: 10px;
-  /* color: #bc4749; */
 }
 .labels-container {
   display: flex;
@@ -208,20 +207,10 @@ footer {
   margin: 0 auto;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   font-size: 30px;
 }
-.how-one {
-  align-self: flex-start;
-  width: 30%;
-  text-align: center;
-}
-.how-two {
-  align-self: center;
-  width: 30%;
-  text-align: center;
-}
-.how-three {
-  align-self: flex-end;
+.how-text {
   width: 30%;
   text-align: center;
 }
@@ -292,23 +281,34 @@ footer {
 }
 .recipe-card {
   display: flex;
-  justify-content: center;
   align-items: flex-end;
   background-position: center;
   background-size: cover;
   object-fit: cover;
+  position: relative;
+}
+.fa-plus-circle {
+  margin: 10px;
+  color: rgba(0,0,0,.7);
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  padding: 5px;
+  transition: all .3s;
+}
+.fa-plus-circle:hover {
+  color: #000;
+  transform: scale(1.5);
 }
 .recipe-title {
   background-color: rgba(255,255,255,.7);
   width: 100%;
   min-height: fit-content;
-  height: 35%;
   padding: 10px;
-  text-align: center;
   color: black;
 }
 .recipe-card-link:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 /* USER DASHBOARD */
@@ -373,4 +373,13 @@ footer {
 }
 .list-edit-form label, input {
   margin: 0 5px 0 0;
+}
+/* LIST MODAL */
+.list-label {
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+}
+.list-label:hover {
+  background-color: #a7c957;
 }

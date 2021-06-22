@@ -27,9 +27,9 @@ const Home = (): JSX.Element => {
             </div>
             <h2 className="section-title">We help you get and stay organized!</h2>
             <div className="how-div">
-                <div className="how-one"><i className="far fa-user-circle"></i>Create an account and browse thousands of recipes.</div>
-                <div className="how-two"><i className="far fa-plus-square"></i>Add your family's favorite recipes to customizable lists.</div>
-                <div className="how-three"><i className="far fa-calendar-alt"></i>Turn your lists into weekly meal plans which you can use again and again.</div>
+                <div className="how-text"><i className="far fa-user-circle"></i>Create an account and browse thousands of recipes.</div>
+                <div className="how-text"><i className="far fa-plus-square"></i>Add your family's favorite recipes to customizable lists.</div>
+                <div className="how-text"><i className="far fa-calendar-alt"></i>Turn your lists into weekly meal plans which you can use again and again.</div>
             </div>
             <h2 className="section-title">Browse our recipes</h2>
             <div className="card-container">

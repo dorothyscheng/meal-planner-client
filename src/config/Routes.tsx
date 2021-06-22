@@ -45,7 +45,10 @@ const Routes = (props: Props): JSX.Element => {
       <Switch>
         <Route exact path='/' component={ Home } />
         <Route exact path='/recipes/:id' component={ RecipeShow } />
-        <Route path='/recipes' render={(props) => <RecipeContainer {...props} />} />
+        <Route path='/recipes' render={(props) => <RecipeContainer 
+          {...props} 
+          lists={user && user.lists ? user.lists : null}
+          handleUpdateList={handleUpdateList} />} />
         { auth ? protectedRoutes : <Redirect to="/" /> }
       </Switch>
     )
