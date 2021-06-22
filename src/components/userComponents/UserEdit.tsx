@@ -5,7 +5,6 @@ import User from '../../models/User.interface';
 
 interface Props {
     user: User | null,
-    // error: string | null,
     handleUserEdit: (username: User['username'], user: User) => void,
 }
 
@@ -125,7 +124,7 @@ class UserEdit extends React.Component<Props, State> {
     }
 
     componentDidMount() {
-        // console.log(this.props);
+        console.log('mounting: ',this.props);
         if (this.props.user) {
             let familySize: State['familySize'] = '';
             if (this.props.user.familySize) {
@@ -141,7 +140,11 @@ class UserEdit extends React.Component<Props, State> {
 
     render(): JSX.Element {
         if (this.state.redirect) return <Redirect to="/dashboard" />
-        if (!this.props.user) return <h1>Loading...</h1>
+        if (!this.props.user) return (
+            <div className="dashboard-container">
+                <h1>Loading...</h1>
+            </div>
+        );
         const passwordOldDisplay = this.state.passwordOld.split('').map(char => '*').join('');
         const passwordNewDisplay = this.state.passwordNew.split('').map(char => '*').join('');
         const passwordConfirmDisplay = this.state.passwordConfirm.split('').map(char => '*').join('');
@@ -151,7 +154,6 @@ class UserEdit extends React.Component<Props, State> {
                     <h1 className="dashboard-title">{this.props.user.username}</h1>
                 </div>
                 <form className="form">
-                    {/* { this.props.error && <h3>{this.props.error}</h3> } */}
                     { this.state.error && <h3>{this.state.error}</h3> }
                     <label htmlFor="username">Username:</label>
                     <input 
@@ -200,8 +202,7 @@ class UserEdit extends React.Component<Props, State> {
                         <button 
                             className="submit-btn" 
                             type="submit"
-                            onClick={this.handleSubmit}
-                            >Submit</button>
+                            onClick={this.handleSubmit}>Submit</button>
                     </div>
                 </form>
             </div>

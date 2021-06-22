@@ -178,9 +178,7 @@ class SignupModal extends React.Component<Props, State> {
                             onChange={this.handleFamilySizeChange} />
 
                         <div className="actions">
-                            <p 
-                                className="btn cancel-btn" 
-                                onClick={this.handleClose}>Close</p>
+                            <p className="btn cancel-btn">Close</p>
                             <button 
                                 className="submit-btn" 
                                 type="submit"

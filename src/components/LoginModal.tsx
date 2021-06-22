@@ -95,9 +95,7 @@ class LoginModal extends React.Component<Props, State> {
                             value={passwordDisplay}
                             onChange={this.handlePasswordChange} />
                         <div className="actions">
-                            <p 
-                                className="btn cancel-btn" 
-                                onClick={this.handleClose}>Close</p>
+                            <p className="btn cancel-btn">Close</p>
                             <button 
                                 className="submit-btn" 
                                 type="submit"
