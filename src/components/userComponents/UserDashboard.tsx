@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import User from '../../models/User.interface';
 import UserDeleteModal from './UserDeleteModal';
+import ListContainer from '../../containers/ListContainer';
 
 interface Style {
     display: 'none' | 'flex',
@@ -92,25 +93,14 @@ class UserDashboard extends React.Component<Props, State> {
                         <p className="dismiss-message" onClick={this.dismissMessage}>Dismiss</p>
                     </div>
                 )}
+                <div className="dashboard-title-container">
+                    <h2 className="dashboard-title">My Lists</h2>
+                    <p className="btn submit-btn">New List</p>
+                </div>
+                <ListContainer lists={this.props.user.lists ? this.props.user.lists : null}/>
             </div>
         );
     }
 }
-
-// const UserDashboard = (props: Props): JSX.Element => {
-//     if (!props.user) return <h1>Loading...</h1>
-//     return (
-//         <div className="dashboard-container">
-//             <div className="dashboard-title-container">
-//                 <h1 className="dashboard-title">{props.user.username}</h1>
-//                 <div className="actions">
-//                     <Link to="/dashboard/edit" className="btn cancel-btn">Edit</Link>
-//                     <p className="btn delete-btn">Delete</p>
-//                 </div>
-//             </div>
-//             { props.error && <h3>{props.error}</h3>}
-//         </div>
-//     );
-// }
 
 export default UserDashboard;

@@ -101,17 +101,17 @@ export interface RecipeResponse {
     hits: RecipeLong[],
 }
 
-export default interface Recipe {
-    url?: string,
-    image?: string,
-    source?: string,
-    label?: string,
-    yield?: number,
-    dietLabels?: string[],
-    healthLabels?: string[],
-    ingredientLines?: string[],
-    totalTime?: number,
-    cuisineType?: string[],
-    mealType?: string[],
-    apiLink?: string,
-}
+// export default interface Recipe {
+//     url?: string,
+//     image?: string,
+//     source?: string,
+//     label?: string,
+//     yield?: number,
+//     dietLabels?: string[],
+//     healthLabels?: string[],
+//     ingredientLines?: string[],
+//     totalTime?: number,
+//     cuisineType?: string[],
+//     mealType?: string[],
+//     apiLink?: string,
+// }

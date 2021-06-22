@@ -342,3 +342,23 @@ footer {
   cursor: pointer;
   text-decoration: underline;
 }
+.dash-section {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.lists {
+  border: 1px solid black;
+  padding: 10px;
+}
+.list-show {
+  display: flex;
+  align-items: center;
+}
+.list-show-recipes {
+  display: flex;
+  margin-left: 20px;
+}
+.underline {
+  text-decoration: underline;
+}

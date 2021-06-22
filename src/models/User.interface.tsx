@@ -1,4 +1,5 @@
-import Recipe from './Recipe.interface';
+import List from './List.interface';
+import Week from './Week.interface';
 
 export interface UserLogin {
     username: User['username'],
@@ -10,7 +11,7 @@ export default interface User {
     password: string,
     email: string,
     familySize?: number,
-    lists?: Recipe[],
-    weeks?: Recipe[],
+    lists?: List[],
+    weeks?: Week[],
     _id?: string,
 }

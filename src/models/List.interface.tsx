@@ -1,6 +1,7 @@
-import Recipe from './Recipe.interface';
+import { RecipeLong } from './Recipe.interface';
 
 export default interface List {
     name: string,
-    recipes: Recipe[],
+    recipes: RecipeLong[],
+    _id?: string,
 }
