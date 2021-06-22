@@ -23,17 +23,20 @@ const Home = (): JSX.Element => {
     return (
         <>
             <div className="home-title-div">
-                <h1 className="main-title home-title">Here to help you get and stay organized!</h1>
+                <h1 className="main-title home-title">Meal planning made simple.</h1>
             </div>
-            <div className="home-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec consequat diam, quis efficitur eros. Nullam massa tortor, ultricies eget massa ac, molestie vestibulum orci. Ut semper justo ut mattis vulputate. Duis id iaculis nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec aliquam tellus. Vivamus pellentesque felis odio, vel cursus nulla malesuada non. Fusce volutpat, ligula et mattis posuere, dui tellus vehicula nulla, id cursus lacus tellus vel neque. Phasellus quis nisl vitae erat dapibus ornare. Donec pharetra feugiat leo, sit amet gravida massa feugiat quis. Nam ornare luctus volutpat. Morbi tristique velit non ligula laoreet iaculis. Aenean egestas molestie urna. Ut suscipit ligula placerat nunc placerat gravida. Phasellus hendrerit urna in neque bibendum placerat. Donec mattis, arcu id malesuada finibus, nunc elit elementum enim, a sagittis orci nisi ac nisl.
+            <h2 className="section-title">We help you get and stay organized!</h2>
+            <div className="how-div">
+                <div className="how-one"><i className="far fa-user-circle"></i>Create an account and browse thousands of recipes.</div>
+                <div className="how-two"><i className="far fa-plus-square"></i>Add your family's favorite recipes to customizable lists.</div>
+                <div className="how-three"><i className="far fa-calendar-alt"></i>Turn your lists into weekly meal plans which you can use again and again.</div>
             </div>
             <h2 className="section-title">Browse our recipes</h2>
             <div className="card-container">
                 { queryCards }
             </div>
-            <h2 className="section-title">How it works</h2>
-            <div className="home-text">
+            <h2 className="section-title">Another section</h2>
+            <div className="home-text final-section">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec consequat diam, quis efficitur eros. Nullam massa tortor, ultricies eget massa ac, molestie vestibulum orci. Ut semper justo ut mattis vulputate. Duis id iaculis nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec aliquam tellus. Vivamus pellentesque felis odio, vel cursus nulla malesuada non. Fusce volutpat, ligula et mattis posuere, dui tellus vehicula nulla, id cursus lacus tellus vel neque. Phasellus quis nisl vitae erat dapibus ornare. Donec pharetra feugiat leo, sit amet gravida massa feugiat quis. Nam ornare luctus volutpat. Morbi tristique velit non ligula laoreet iaculis. Aenean egestas molestie urna. Ut suscipit ligula placerat nunc placerat gravida. Phasellus hendrerit urna in neque bibendum placerat. Donec mattis, arcu id malesuada finibus, nunc elit elementum enim, a sagittis orci nisi ac nisl.
             </div>
         </>

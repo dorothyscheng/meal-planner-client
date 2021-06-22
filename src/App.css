@@ -121,7 +121,7 @@ label {
 }
 .fa-utensil-spoon {
   margin-right: 10px;
-  color: #bc4749;
+  /* color: #bc4749; */
 }
 .labels-container {
   display: flex;
@@ -199,6 +199,35 @@ footer {
   margin: 0 auto;
   font-size: 18px;
 }
+.how-div {
+  width: 90%;
+  height: 30vh;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 30px;
+}
+.how-one {
+  align-self: flex-start;
+  width: 30%;
+  text-align: center;
+}
+.how-two {
+  align-self: center;
+  width: 30%;
+  text-align: center;
+}
+.how-three {
+  align-self: flex-end;
+  width: 30%;
+  text-align: center;
+}
+.far {
+  font-size: 60px;
+  display: block;
+  margin-bottom: 20px;
+  color: #bc4749;
+}
 .query-card-link {
   width: 20%;
 }
@@ -242,6 +271,10 @@ footer {
   text-align: center;
   margin-top: 50px;
   margin-bottom: 20px;
+  font-size: 30px;
+}
+.final-section {
+  padding-bottom: 50px;
 }
 /* RECIPE INDEX */
 .recipe-container {
