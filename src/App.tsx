@@ -18,7 +18,7 @@ interface State {
    displayLoginModal: boolean,
    displaySignupModal: boolean,
    loginSignupError: string | null,
-   updateError: string | null,
+   updateMessage: string | null,
 }
 
 class App extends React.Component<{}, State> {
@@ -27,7 +27,7 @@ class App extends React.Component<{}, State> {
     displayLoginModal: false,
     displaySignupModal: false,
     loginSignupError: null,
-    updateError: null
+    updateMessage: null
   }
 
   isError = (response: errorMessage | User): response is errorMessage => {
@@ -106,12 +106,12 @@ class App extends React.Component<{}, State> {
       .then(response => {
         if (this.isError(response)) {
           this.setState({
-            updateError: response.message,
+            updateMessage: response.message,
           });
         } else {
           this.setState({
             user: response,
-            updateError: null,
+            updateMessage: 'Success!',
           });
           localStorage.setItem('auth', response.username);
         };
@@ -123,12 +123,12 @@ class App extends React.Component<{}, State> {
       .then(response => {
         if (this.isError(response)) {
           this.setState({
-            updateError: response.message,
+            updateMessage: response.message,
           });
         } else {
           this.setState({
             user: null,
-            updateError: null,
+            updateMessage: null,
           });
           localStorage.clear();
         };
@@ -177,7 +177,7 @@ class App extends React.Component<{}, State> {
               auth={this.state.user ? this.state.user.username : null} />
             <Routes 
               user={this.state.user} 
-              updateError={this.state.updateError} 
+              updateMessage={this.state.updateMessage} 
               handleUserEdit={this.handleUserEdit}
               handleUserDelete={this.handleUserDelete}
               auth={this.state.user ? this.state.user.username : null} />

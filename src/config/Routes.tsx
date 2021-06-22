@@ -9,7 +9,7 @@ import UserEdit from '../components/userComponents/UserEdit';
 
 interface Props {
   user: User | null,
-  updateError: string | null,
+  updateMessage: string | null,
   handleUserEdit: (username: User['username'], user: User) => void,
   handleUserDelete: (user: User) => void,
   auth: User['username'] | null,
@@ -18,12 +18,12 @@ interface Props {
 const Routes = (props: Props): JSX.Element => {
   const auth = props.auth || localStorage.getItem('auth');
   const user = props.user;
-  const updateError = props.updateError;
+  const updateMessage = props.updateMessage;
   const handleUserEdit = props.handleUserEdit;
   const handleUserDelete = props.handleUserDelete;
   const protectedRoutes = (
     <Switch>
-      <Route exact path='/dashboard' render={(props) => <UserDashboard {...props} user={user} error={updateError} handleUserDelete={handleUserDelete} />} />
+      <Route exact path='/dashboard' render={(props) => <UserDashboard {...props} user={user} message={updateMessage} handleUserDelete={handleUserDelete} />} />
       <Route path='/dashboard/edit' render={(props) => <UserEdit {...props} user={user} handleUserEdit={handleUserEdit} />} />
     </Switch>
   )

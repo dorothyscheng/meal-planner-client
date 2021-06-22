@@ -4,21 +4,27 @@ import { Link, Redirect } from 'react-router-dom';
 import User from '../../models/User.interface';
 import UserDeleteModal from './UserDeleteModal';
 
+interface Style {
+    display: 'none' | 'flex',
+}
+
 interface Props {
     user: User | null,
-    error: string | null,
+    message: string | null,
     handleUserDelete: (user: User) => void,
 }
 
 interface State {
     redirect: boolean,
     deleteModalDisplay: boolean,
+    messageDisplay: boolean,
 }
 
 class UserDashboard extends React.Component<Props, State> {
     state: State = {
         redirect: false,
         deleteModalDisplay: false,
+        messageDisplay: false,
     }
 
     handleDelete = (): void => {
@@ -42,7 +48,29 @@ class UserDashboard extends React.Component<Props, State> {
         });
     }
 
+    dismissMessage = (): void => {
+        this.setState({
+            messageDisplay: false,
+        })
+    }
+
+    componentDidMount() {
+        if (this.props.message) {
+            this.setState({
+                messageDisplay: true,
+            })
+        }
+    }
+
     render(): JSX.Element {
+        let style: Style = {
+            display: 'none',
+        }
+        if (this.state.messageDisplay) {
+            style = {
+                display: 'flex',
+            }
+        };
         if (this.state.redirect) return <Redirect to="/" />
         if (!this.props.user) return <h1>Loading...</h1>
         return (
@@ -58,7 +86,12 @@ class UserDashboard extends React.Component<Props, State> {
                             hideDeleteModal={this.hideDeleteModal} />
                     </div>
                 </div>
-                { this.props.error && <h3>{this.props.error}</h3>}
+                { this.props.message && (
+                    <div className="dash-message-div" style={style}>
+                        <h3>{this.props.message}</h3>
+                        <p className="dismiss-message" onClick={this.dismissMessage}>Dismiss</p>
+                    </div>
+                )}
             </div>
         );
     }

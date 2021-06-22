@@ -330,3 +330,15 @@ footer {
 .delete-btn:hover {
   background-color: red;
 }
+.dash-message-div {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  align-items: center;
+}
+.dismiss-message {
+  margin-left: 10px;
+  font-style: italic;
+  cursor: pointer;
+  text-decoration: underline;
+}

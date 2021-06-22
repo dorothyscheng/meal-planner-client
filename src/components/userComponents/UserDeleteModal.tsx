@@ -1,7 +1,5 @@
 import React from 'react';
 
-import User from '../../models/User.interface';
-
 interface Style {
     display: 'none' | 'block',
 }
@@ -15,7 +13,6 @@ interface Props {
 class UserDeleteModal extends React.Component<Props, {}> {
     handleClose = (e: React.MouseEvent) => {
         const target = e.target as Element;
-        console.log(target.className);
         if (target.className === 'modal-container' || target.className === 'btn cancel-btn') {
             this.props.hideDeleteModal();
         };
