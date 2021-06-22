@@ -18,6 +18,16 @@ class ListModel {
             return error;
         }
     }
+
+    static update = async (list: List): Promise<List | errorMessage> => {
+        try {
+            const response: AxiosResponse = await axios.put<List>(`${endPoint}/${list._id}`, list);
+            return response.data;
+        } catch (err: unknown) {
+            const error = err as AxiosError;
+            return error;
+        }
+    }
 }
 
 export default ListModel

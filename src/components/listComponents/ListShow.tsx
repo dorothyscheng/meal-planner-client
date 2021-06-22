@@ -1,13 +1,12 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
-
 import List from '../../models/List.interface';
 import RecipeCard from '../recipeComponents/RecipeCard';
 import EditList from './EditList';
 
 interface Props {
-    list: List;
+    list: List,
+    handleUpdateList: (list: List) => void,
 }
 
 interface State {
@@ -19,13 +18,13 @@ class ListShow extends React.Component<Props, State> {
         showEditList: false,
     }
 
-    showEditList = (e: React.MouseEvent): void => {
+    showEditList = (): void => {
         this.setState({
             showEditList: true,
         });
     }
 
-    hideEditList = (e: React.MouseEvent): void => {
+    hideEditList = (): void => {
         this.setState({
             showEditList: false,
         })
@@ -33,19 +32,23 @@ class ListShow extends React.Component<Props, State> {
 
     render(): JSX.Element {
         const recipeCards = this.props.list.recipes.map(recipe => <RecipeCard recipe={recipe} />)
-        const noRecipes = (
-            <>
-                <Link className="underline" to="/recipes"><p>Search for recipes to add</p></Link>
-            </>
-        )
+        // const noRecipes = (
+        //     <>
+        //         <Link className="underline" to="/recipes"><p>Search for recipes to add</p></Link>
+        //     </>
+        // )
         return (
             <div className="list-show">
                 <div className="list-show-title">
-                    <h2>{this.props.list.name}</h2>
-                    <EditList display={this.state.showEditList} hideEditList={this.hideEditList} name={this.props.list.name}/>
+                    <h3>{this.props.list.name}</h3>
+                    <EditList 
+                        display={this.state.showEditList} 
+                        hideEditList={this.hideEditList} 
+                        list={this.props.list}
+                        handleUpdateList={this.props.handleUpdateList} />
                 </div>
                 <div className="list-show-recipes">
-                    { recipeCards.length === 0 ? noRecipes : recipeCards }
+                    { recipeCards.length === 0 && recipeCards }
                 </div>
                 <div className="actions">
                     <p className="btn cancel-btn" onClick={this.showEditList}>Edit</p>

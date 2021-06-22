@@ -2,13 +2,14 @@ import List from '../models/List.interface';
 import ListShow from '../components/listComponents/ListShow';
 
 interface Props {
-    lists: List[] | null;
+    lists: List[] | null,
+    handleUpdateList: (list: List) => void,
 }
 
 const ListContainer = (props: Props): JSX.Element => {
     let listShow;
     if (props.lists && props.lists.length > 0) {
-        listShow = props.lists.map(list => <ListShow key={list._id} list={list} />)
+        listShow = props.lists.map(list => <ListShow key={list._id} list={list} handleUpdateList={props.handleUpdateList} />)
     }
     return (
         <section className="dash-section lists">

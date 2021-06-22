@@ -1,4 +1,5 @@
 import React from 'react';
+import List from '../../models/List.interface';
 
 interface Style {
     display: 'none' | 'flex',
@@ -6,17 +7,22 @@ interface Style {
 
 interface Props {
     display: boolean,
-    hideEditList: (e: React.MouseEvent) => void,
-    name: string,
+    hideEditList: () => void,
+    list: List,
+    handleUpdateList: (list: List) => void,
 }
 
 interface State {
-    name: string,
+    name: List['name'],
+    recipes: List['recipes'],
+    _id: List['_id'],
 }
 
 class EditList extends React.Component<Props, State> {
     state: State = {
         name: '',
+        recipes: [],
+        _id: '',
     }
 
     handleNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -25,16 +31,24 @@ class EditList extends React.Component<Props, State> {
         })
     }
 
-    handleClose = (e: React.MouseEvent): void => {
+    handleClose = (): void => {
         this.setState({
-            name: this.props.name,
+            name: this.props.list.name,
         });
-        this.props.hideEditList(e);
+        this.props.hideEditList();
+    }
+
+    handleSubmit = (e: React.FormEvent): void => {
+        e.preventDefault();
+        this.props.handleUpdateList(this.state);
+        this.props.hideEditList();
     }
 
     componentDidMount() {
         this.setState({
-            name: this.props.name,
+            name: this.props.list.name,
+            recipes: this.props.list.recipes,
+            _id: this.props.list._id,
         })
     }
 
@@ -57,7 +71,7 @@ class EditList extends React.Component<Props, State> {
                         onChange={this.handleNameChange} />
                     <div className="actions">
                         <p className="btn cancel-btn" onClick={this.handleClose}>Close</p>
-                        <button className="submit-btn">Submit</button>
+                        <button className="submit-btn" onClick={this.handleSubmit}>Submit</button>
                     </div>
             </form>
         )

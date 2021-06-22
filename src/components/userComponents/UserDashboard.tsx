@@ -5,7 +5,7 @@ import User from '../../models/User.interface';
 import UserDeleteModal from './UserDeleteModal';
 import ListContainer from '../../containers/ListContainer';
 import CreateListModal from '../listComponents/CreateListModal';
-import { ListWithUser } from '../../models/List.interface';
+import List, { ListWithUser } from '../../models/List.interface';
 
 interface Style {
     display: 'none' | 'flex' | 'block',
@@ -16,6 +16,7 @@ interface Props {
     message: string | null,
     handleUserDelete: (user: User) => void,
     handleCreateList: (listWithUser: ListWithUser) => void;
+    handleUpdateList: (list: List) => void,
 }
 
 interface State {
@@ -119,7 +120,9 @@ class UserDashboard extends React.Component<Props, State> {
                     hideCreateListModal={this.hideCreateListModal}
                     handleCreateList={this.props.handleCreateList}
                     username={this.props.user.username} />
-                <ListContainer lists={this.props.user.lists ? this.props.user.lists : null}/>
+                <ListContainer 
+                    lists={this.props.user.lists ? this.props.user.lists : null}
+                    handleUpdateList={this.props.handleUpdateList} />
             </div>
         );
     }

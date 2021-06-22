@@ -6,7 +6,7 @@ import RecipeShow from '../components/recipeComponents/RecipeShow';
 import User from '../models/User.interface';
 import UserDashboard from '../components/userComponents/UserDashboard';
 import UserEdit from '../components/userComponents/UserEdit';
-import { ListWithUser } from '../models/List.interface';
+import List, { ListWithUser } from '../models/List.interface';
 
 interface Props {
   user: User | null,
@@ -15,6 +15,7 @@ interface Props {
   handleUserDelete: (user: User) => void,
   auth: User['username'] | null,
   handleCreateList: (listWithUser: ListWithUser) => void,
+  handleUpdateList: (list: List) => void,
 }
 
 const Routes = (props: Props): JSX.Element => {
@@ -24,6 +25,7 @@ const Routes = (props: Props): JSX.Element => {
   const handleUserEdit = props.handleUserEdit;
   const handleUserDelete = props.handleUserDelete;
   const handleCreateList = props.handleCreateList;
+  const handleUpdateList = props.handleUpdateList;
   const protectedRoutes = (
     <Switch>
       <Route exact path='/dashboard' render={(props) => <UserDashboard 
@@ -31,7 +33,8 @@ const Routes = (props: Props): JSX.Element => {
         user={user} 
         message={updateMessage} 
         handleUserDelete={handleUserDelete}
-        handleCreateList={handleCreateList} />}/>
+        handleCreateList={handleCreateList} 
+        handleUpdateList={handleUpdateList}/>}/>
       <Route path='/dashboard/edit' render={(props) => <UserEdit {...props} user={user} handleUserEdit={handleUserEdit} />} />
     </Switch>
   )

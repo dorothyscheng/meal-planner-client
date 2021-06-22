@@ -163,6 +163,30 @@ class App extends React.Component<{}, State> {
       });
   }
 
+  handleUpdateList = (list: List): void => {
+    ListModel.update(list)
+      .then(response => {
+        if (this.isListError(response)) {
+          this.setState({
+            updateMessage: response.message,
+          });
+        } else {
+          if (this.state.user) {
+            let user = this.state.user;
+            if (!user.lists) {
+              user.lists = [];
+            };
+            let lists = user.lists.filter(list => list._id !== response._id);
+            lists.push(response);
+            user.lists = lists;
+            this.setState({
+              user: user,
+            })
+          }
+        }
+      })
+  }
+
   fetchUserData = (username: User['username']): void => {
     UserModel.show(username)
       .then(response => {
@@ -209,7 +233,8 @@ class App extends React.Component<{}, State> {
               handleUserEdit={this.handleUserEdit}
               handleUserDelete={this.handleUserDelete}
               auth={this.state.user ? this.state.user.username : null}
-              handleCreateList={this.handleCreateList} />
+              handleCreateList={this.handleCreateList}
+              handleUpdateList={this.handleUpdateList} />
           </Router>
         </div>
         <Footer />
