@@ -6,6 +6,8 @@ import User, { UserLogin } from './models/User.interface';
 import UserModel from './models/UserModel';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import List, { ListWithUser } from './models/List.interface';
+import ListModel from './models/ListModel';
 
 import './App.css';
 
@@ -31,6 +33,10 @@ class App extends React.Component<{}, State> {
   }
 
   isError = (response: errorMessage | User): response is errorMessage => {
+    return (response as errorMessage).message !== undefined;
+  }
+
+  isListError = (response: errorMessage | List): response is errorMessage => {
     return (response as errorMessage).message !== undefined;
   }
   
@@ -135,6 +141,28 @@ class App extends React.Component<{}, State> {
       });
   }
 
+  handleCreateList = (listWithUser: ListWithUser): void => {
+    ListModel.create(listWithUser)
+      .then(response => {
+        if (this.isListError(response)) {
+          this.setState({
+            updateMessage: response.message,
+          });
+        } else {
+          if (this.state.user) {
+            let user = this.state.user;
+            if (!user.lists) {
+              user.lists = [];
+            };
+            user.lists.push(response);
+            this.setState({
+              user: user,
+            });
+          };
+        };
+      });
+  }
+
   fetchUserData = (username: User['username']): void => {
     UserModel.show(username)
       .then(response => {
@@ -180,7 +208,8 @@ class App extends React.Component<{}, State> {
               updateMessage={this.state.updateMessage} 
               handleUserEdit={this.handleUserEdit}
               handleUserDelete={this.handleUserDelete}
-              auth={this.state.user ? this.state.user.username : null} />
+              auth={this.state.user ? this.state.user.username : null}
+              handleCreateList={this.handleCreateList} />
           </Router>
         </div>
         <Footer />

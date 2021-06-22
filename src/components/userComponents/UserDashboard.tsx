@@ -4,21 +4,25 @@ import { Link, Redirect } from 'react-router-dom';
 import User from '../../models/User.interface';
 import UserDeleteModal from './UserDeleteModal';
 import ListContainer from '../../containers/ListContainer';
+import CreateListModal from '../listComponents/CreateListModal';
+import { ListWithUser } from '../../models/List.interface';
 
 interface Style {
-    display: 'none' | 'flex',
+    display: 'none' | 'flex' | 'block',
 }
 
 interface Props {
     user: User | null,
     message: string | null,
     handleUserDelete: (user: User) => void,
+    handleCreateList: (listWithUser: ListWithUser) => void;
 }
 
 interface State {
     redirect: boolean,
     deleteModalDisplay: boolean,
     messageDisplay: boolean,
+    createListModalDisplay: boolean,
 }
 
 class UserDashboard extends React.Component<Props, State> {
@@ -26,6 +30,7 @@ class UserDashboard extends React.Component<Props, State> {
         redirect: false,
         deleteModalDisplay: false,
         messageDisplay: false,
+        createListModalDisplay: false,
     }
 
     handleDelete = (): void => {
@@ -52,6 +57,18 @@ class UserDashboard extends React.Component<Props, State> {
     dismissMessage = (): void => {
         this.setState({
             messageDisplay: false,
+        })
+    }
+
+    showCreateListModal = (): void => {
+        this.setState({
+            createListModalDisplay: true,
+        })
+    }
+
+    hideCreateListModal = (): void => {
+        this.setState({
+            createListModalDisplay: false,
         })
     }
 
@@ -95,8 +112,13 @@ class UserDashboard extends React.Component<Props, State> {
                 )}
                 <div className="dashboard-title-container">
                     <h2 className="dashboard-title">My Lists</h2>
-                    <p className="btn submit-btn">New List</p>
+                    <p className="btn submit-btn" onClick={this.showCreateListModal}>New List</p>
                 </div>
+                <CreateListModal 
+                    display={this.state.createListModalDisplay} 
+                    hideCreateListModal={this.hideCreateListModal}
+                    handleCreateList={this.props.handleCreateList}
+                    username={this.props.user.username} />
                 <ListContainer lists={this.props.user.lists ? this.props.user.lists : null}/>
             </div>
         );

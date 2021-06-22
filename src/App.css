@@ -348,10 +348,12 @@ footer {
   justify-content: space-between;
 }
 .lists {
-  border: 1px solid black;
-  padding: 10px;
+  flex-direction: column;
 }
 .list-show {
+  border: 1px solid black;
+  padding: 10px;
+  margin: 5px 0 5px 0;
   display: flex;
   align-items: center;
 }
