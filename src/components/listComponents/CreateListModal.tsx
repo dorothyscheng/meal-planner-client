@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ListWithUser } from '../../models/List.interface';
+import List from '../../models/List.interface';
 
 interface Style {
     display: 'none' | 'block',
@@ -9,7 +9,7 @@ interface Style {
 interface Props {
     display: boolean,
     hideCreateListModal: () => void,
-    handleCreateList: (listWithUser: ListWithUser) => void,
+    handleCreateList: (list: List) => void,
     username: string,
 }
 
@@ -40,6 +40,7 @@ class CreateListModal extends React.Component<Props, State> {
         const newList = {
             username: this.props.username,
             name: this.state.name,
+            recipes: [],
         }
         this.props.handleCreateList(newList);
         this.props.hideCreateListModal();

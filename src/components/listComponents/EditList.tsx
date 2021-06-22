@@ -16,6 +16,7 @@ interface State {
     name: List['name'],
     recipes: List['recipes'],
     _id: List['_id'],
+    username: List['username'];
 }
 
 class EditList extends React.Component<Props, State> {
@@ -23,6 +24,7 @@ class EditList extends React.Component<Props, State> {
         name: '',
         recipes: [],
         _id: '',
+        username: '',
     }
 
     handleNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -49,6 +51,7 @@ class EditList extends React.Component<Props, State> {
             name: this.props.list.name,
             recipes: this.props.list.recipes,
             _id: this.props.list._id,
+            username: this.props.list.username,
         })
     }
 

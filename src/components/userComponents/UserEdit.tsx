@@ -124,7 +124,6 @@ class UserEdit extends React.Component<Props, State> {
     }
 
     componentDidMount() {
-        console.log('mounting: ',this.props);
         if (this.props.user) {
             let familySize: State['familySize'] = '';
             if (this.props.user.familySize) {

@@ -6,7 +6,7 @@ import User, { UserLogin } from './models/User.interface';
 import UserModel from './models/UserModel';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import List, { ListWithUser } from './models/List.interface';
+import List from './models/List.interface';
 import ListModel from './models/ListModel';
 
 import './App.css';
@@ -60,13 +60,11 @@ class App extends React.Component<{}, State> {
             loginSignupError: response.message,
           });
         } else {
-          this.setState({
-            user: response,
-            loginSignupError: null,
+          this.handleLogin({
+            username: response.username,
+            password: response.password,
           });
-          localStorage.setItem('auth', response.username);
-          this.hideSignup();
-        }
+        };
       });
   }
 
@@ -141,8 +139,8 @@ class App extends React.Component<{}, State> {
       });
   }
 
-  handleCreateList = (listWithUser: ListWithUser): void => {
-    ListModel.create(listWithUser)
+  handleCreateList = (list: List): void => {
+    ListModel.create(list)
       .then(response => {
         if (this.isListError(response)) {
           this.setState({
@@ -185,6 +183,29 @@ class App extends React.Component<{}, State> {
           }
         }
       })
+  }
+
+  handleDeleteList = (list: List): void => {
+    ListModel.delete(list)
+      .then(response => {
+        console.log(response);
+        if (this.isListError(response)) {
+          this.setState({
+            updateMessage: response.message,
+          });
+        } else {
+          if (this.state.user) {
+            let user = this.state.user;
+            if (!user.lists) {
+              user.lists = [];
+            };
+            user.lists = user.lists.filter(list => list._id !== response._id);
+            this.setState({
+              user: user,
+            });
+          };
+        };
+      });
   }
 
   fetchUserData = (username: User['username']): void => {
@@ -234,7 +255,8 @@ class App extends React.Component<{}, State> {
               handleUserDelete={this.handleUserDelete}
               auth={this.state.user ? this.state.user.username : null}
               handleCreateList={this.handleCreateList}
-              handleUpdateList={this.handleUpdateList} />
+              handleUpdateList={this.handleUpdateList}
+              handleDeleteList={this.handleDeleteList} />
           </Router>
         </div>
         <Footer />

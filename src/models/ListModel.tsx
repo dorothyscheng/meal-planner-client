@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
 
-import List, { ListWithUser } from './List.interface';
+import List from './List.interface';
 
 const endPoint = 'http://localhost:4000/api/v1/lists';
 
@@ -9,9 +9,9 @@ interface errorMessage {
 }
 
 class ListModel {
-    static create = async (listWithUser: ListWithUser): Promise<List | errorMessage> => {
+    static create = async (list: List): Promise<List | errorMessage> => {
         try {
-            const response: AxiosResponse = await axios.post<List>(endPoint, listWithUser);
+            const response: AxiosResponse = await axios.post<List>(endPoint, list);
             return response.data;
         } catch (err: unknown) {
             const error = err as AxiosError;
@@ -22,6 +22,16 @@ class ListModel {
     static update = async (list: List): Promise<List | errorMessage> => {
         try {
             const response: AxiosResponse = await axios.put<List>(`${endPoint}/${list._id}`, list);
+            return response.data;
+        } catch (err: unknown) {
+            const error = err as AxiosError;
+            return error;
+        }
+    }
+
+    static delete = async (list: List): Promise<List | errorMessage> => {
+        try {
+            const response: AxiosResponse = await axios.delete<List>(`${endPoint}/${list._id}`);
             return response.data;
         } catch (err: unknown) {
             const error = err as AxiosError;
