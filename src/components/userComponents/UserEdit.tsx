@@ -192,6 +192,7 @@ class UserEdit extends React.Component<Props, State> {
 
                     <label htmlFor="familySize">How many are you cooking for?</label>
                     <input 
+                        className="last-input"
                         name="familySize" 
                         type="number"
                         value={this.state.familySize}

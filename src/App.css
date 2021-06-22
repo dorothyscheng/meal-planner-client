@@ -72,10 +72,13 @@ label {
   width: 90%;
   margin: 0 auto;
 }
+.last-input {
+  margin-bottom: 20px;
+}
 .actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 20px;
+  align-items: center;
 }
 .btn {
   border: 1px solid #000;
@@ -351,11 +354,11 @@ footer {
   flex-direction: column;
 }
 .list-show {
-  border: 1px solid black;
+  border-bottom: 1px solid black;
   padding: 10px;
-  margin: 5px 0 5px 0;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .list-show-recipes {
   display: flex;
@@ -363,4 +366,11 @@ footer {
 }
 .underline {
   text-decoration: underline;
+}
+.list-edit-form {
+  align-items: center;
+  justify-content: space-between;
+}
+.list-edit-form label, input {
+  margin: 0 5px 0 0;
 }

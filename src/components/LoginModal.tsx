@@ -90,6 +90,7 @@ class LoginModal extends React.Component<Props, State> {
                             onChange={this.handleUsernameChange} />
                         <label htmlFor="password">Password:</label>
                         <input 
+                            className="last-input"
                             name="password" 
                             type="text"
                             value={passwordDisplay}

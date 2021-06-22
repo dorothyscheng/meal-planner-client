@@ -59,15 +59,16 @@ class CreateListModal extends React.Component<Props, State> {
                 <div className="modal-content">
                     <form className="form">
                         <label htmlFor="username">What do you want to call your list?</label>
-                            <input 
-                                name="username" 
-                                type="text"
-                                value={this.state.name}
-                                onChange={this.handleNameChange} />
-                            <div className="actions">
-                                <p className="btn cancel-btn">Close</p>
-                                <button className="submit-btn" onClick={this.handleSubmit}>Submit</button>
-                            </div>
+                        <input 
+                            className="last-input"
+                            name="username" 
+                            type="text"
+                            value={this.state.name}
+                            onChange={this.handleNameChange} />
+                        <div className="actions">
+                            <p className="btn cancel-btn">Close</p>
+                            <button className="submit-btn" onClick={this.handleSubmit}>Submit</button>
+                        </div>
                     </form>
                 </div>
             </div>
