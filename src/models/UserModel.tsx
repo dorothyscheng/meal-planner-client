@@ -49,6 +49,16 @@ class UserModel {
         };
     }
 
+    static delete = async (user: User): Promise<User | errorMessage> => {
+        try {
+            const response: AxiosResponse = await axios.delete<User>(`${endPoint}/${user.username}`);
+            return response.data;
+        } catch (err: unknown) {
+            const error = err as AxiosError;
+            return error;
+        }
+    }
+
 }
 
 export default UserModel;

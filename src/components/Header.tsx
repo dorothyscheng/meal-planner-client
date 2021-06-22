@@ -17,6 +17,7 @@ interface Props {
     hideSignup: () => void,
     showSignup: () => void,
     handleSignup: (user: User) => void,
+    auth: User['username'] | null,
 }
 
 class Header extends React.Component<Props, {}> {
@@ -46,7 +47,7 @@ class Header extends React.Component<Props, {}> {
                 <p className="nav-link" onClick={this.props.showSignup}>Sign Up</p>
             </>
         )
-        const auth = localStorage.getItem('auth');
+        const auth = this.props.auth;
         return (
             <header>
                 <div className="header-content">

@@ -118,6 +118,23 @@ class App extends React.Component<{}, State> {
       });
   }
 
+  handleUserDelete = (user: User): void => {
+    UserModel.delete(user)
+      .then(response => {
+        if (this.isError(response)) {
+          this.setState({
+            updateError: response.message,
+          });
+        } else {
+          this.setState({
+            user: null,
+            updateError: null,
+          });
+          localStorage.clear();
+        };
+      });
+  }
+
   fetchUserData = (username: User['username']): void => {
     UserModel.show(username)
       .then(response => {
@@ -156,8 +173,14 @@ class App extends React.Component<{}, State> {
               displaySignupModal={this.state.displaySignupModal}
               showSignup={this.showSignup}
               hideSignup={this.hideSignup}
-              handleSignup={this.handleSignup} />
-            <Routes user={this.state.user} updateError={this.state.updateError} handleUserEdit={this.handleUserEdit} />
+              handleSignup={this.handleSignup}
+              auth={this.state.user ? this.state.user.username : null} />
+            <Routes 
+              user={this.state.user} 
+              updateError={this.state.updateError} 
+              handleUserEdit={this.handleUserEdit}
+              handleUserDelete={this.handleUserDelete}
+              auth={this.state.user ? this.state.user.username : null} />
           </Router>
         </div>
         <Footer />
