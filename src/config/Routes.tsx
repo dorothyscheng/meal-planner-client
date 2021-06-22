@@ -5,17 +5,23 @@ import RecipeContainer from '../containers/RecipeContainer';
 import RecipeShow from '../components/recipeComponents/RecipeShow';
 import User from '../models/User.interface';
 import UserDashboard from '../components/userComponents/UserDashboard';
+import UserEdit from '../components/userComponents/UserEdit';
 
 interface Props {
   user: User | null,
+  updateError: string | null,
+  handleUserEdit: (username: User['username'], user: User) => void,
 }
 
 const Routes = (props: Props): JSX.Element => {
   const auth = localStorage.getItem('auth');
   const user = props.user;
+  const updateError = props.updateError;
+  const handleUserEdit = props.handleUserEdit;
   const protectedRoutes = (
     <Switch>
-      <Route exact path='/dashboard' render={(props) => <UserDashboard {...props} user={user} />} />
+      <Route exact path='/dashboard' render={(props) => <UserDashboard {...props} user={user} error={updateError} />} />
+      <Route path='/dashboard/edit' render={(props) => <UserEdit {...props} user={user} handleUserEdit={handleUserEdit} />} />
     </Switch>
   )
     return (

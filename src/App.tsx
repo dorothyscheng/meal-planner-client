@@ -17,7 +17,8 @@ interface State {
    user: User | null,
    displayLoginModal: boolean,
    displaySignupModal: boolean,
-   error: string | null,
+   loginSignupError: string | null,
+   updateError: string | null,
 }
 
 class App extends React.Component<{}, State> {
@@ -25,7 +26,8 @@ class App extends React.Component<{}, State> {
     user: null,
     displayLoginModal: false,
     displaySignupModal: false,
-    error: null,
+    loginSignupError: null,
+    updateError: null
   }
 
   isError = (response: errorMessage | User): response is errorMessage => {
@@ -49,12 +51,12 @@ class App extends React.Component<{}, State> {
       .then(response => {
         if (this.isError(response)) {
           this.setState({
-            error: response.message,
+            loginSignupError: response.message,
           });
         } else {
           this.setState({
             user: response,
-            error: null,
+            loginSignupError: null,
           });
           localStorage.setItem('auth', response.username);
           this.hideSignup();
@@ -79,12 +81,12 @@ class App extends React.Component<{}, State> {
       .then(response => {
         if (this.isError(response)) {
           this.setState({
-            error: response.message,
+            loginSignupError: response.message,
           });
         } else {
           this.setState({
             user: response,
-            error: null,
+            loginSignupError: null,
           });
           localStorage.setItem('auth', response.username);
           this.hideLogin();
@@ -99,17 +101,34 @@ class App extends React.Component<{}, State> {
     });
   }
 
+  handleUserEdit = (username: User['username'], user: User): void => {
+    UserModel.update(username, user)
+      .then(response => {
+        if (this.isError(response)) {
+          this.setState({
+            updateError: response.message,
+          });
+        } else {
+          this.setState({
+            user: response,
+            updateError: null,
+          });
+          localStorage.setItem('auth', response.username);
+        };
+      });
+  }
+
   fetchUserData = (username: User['username']): void => {
     UserModel.show(username)
       .then(response => {
         if (this.isError(response)) {
           this.setState({
-            error: response.message,
+            loginSignupError: response.message,
           });
         } else {
           this.setState({
             user: response,
-            error: null,
+            loginSignupError: null,
           });
         };
       });
@@ -132,13 +151,13 @@ class App extends React.Component<{}, State> {
               showLogin={this.showLogin} 
               hideLogin={this.hideLogin} 
               handleLogin={this.handleLogin}
-              error={this.state.error}
+              error={this.state.loginSignupError}
               handleLogout={this.handleLogout}
               displaySignupModal={this.state.displaySignupModal}
               showSignup={this.showSignup}
               hideSignup={this.hideSignup}
               handleSignup={this.handleSignup} />
-            <Routes user={this.state.user} />
+            <Routes user={this.state.user} updateError={this.state.updateError} handleUserEdit={this.handleUserEdit} />
           </Router>
         </div>
         <Footer />

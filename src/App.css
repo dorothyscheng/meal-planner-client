@@ -9,6 +9,7 @@
 }
 a {
   text-decoration: none;
+  color: #000;
 }
 ul {
   list-style: none;
@@ -89,8 +90,11 @@ label {
 .btn:hover {
   color: #fff;
 }
-.submit-btn {
+/* .submit-btn {
   margin-left: 10px;
+} */
+.cancel-btn {
+  margin-right: 10px;
 }
 .submit-btn:hover {
   background-color: #6a994e;
@@ -154,7 +158,7 @@ header {
 nav {
   width: 25%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 .nav-link {
   color: #fff;
@@ -269,4 +273,27 @@ footer {
 }
 .recipe-card-link:hover {
   transform: scale(1.1);
+}
+
+/* USER DASHBOARD */
+.dashboard-container {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.dashboard-title-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dashboard-title {
+  font-family: 'Homemade Apple', cursive;
+  margin-top: 20px;
+  text-align: left;
+}
+.delete-btn:hover {
+  background-color: red;
 }

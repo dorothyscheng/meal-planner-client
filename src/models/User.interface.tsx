@@ -5,16 +5,6 @@ export interface UserLogin {
     password: User['password'],
   }
 
-// export interface UserPopulated {
-//     username: string,
-//     password: string,
-//     email: string,
-//     familySize?: number,
-//     lists?: Recipe[],
-//     weeks?: Recipe[],
-//     _id?: string,
-// }
-
 export default interface User {
     username: string,
     password: string,
