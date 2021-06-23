@@ -364,7 +364,8 @@ footer {
   flex-direction: column;
 }
 .list-show {
-  border-bottom: 1px solid black;
+  /* border-bottom: 1px solid black; */
+  background-color: rgba(167, 201, 87, .3);
   padding: 10px;
   display: flex;
   align-items: center;
@@ -406,7 +407,7 @@ footer {
   width: 90%;
   padding: 5px;
   /* background-color: rgba(56, 102, 65, .7); */
-  background-color: rgba(167, 201, 87, .7);
+  background-color: rgba(167, 201, 87, .3);
   border-radius: 2px;
   /* color: #fff; */
 }

@@ -10,7 +10,6 @@ const WeekContainer = (props: Props): JSX.Element => {
     const [selectedWeek, setSelectedWeek] = useState(props.weeks? props.weeks[0] : null);
 
     const handleWeekClick = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-        // const target = e.target as Element;
         const weekId = e.target.value;
         if (props.weeks) {
             setSelectedWeek(props.weeks.filter(week => week._id === weekId)[0]);
@@ -36,7 +35,7 @@ const WeekContainer = (props: Props): JSX.Element => {
     return (
         <section className="dash-section">
             <div className="week-titles">
-                {props.weeks ? <select name="week" onChange={handleWeekClick}>{ weekTitles }</select> : <h3>Loading...</h3>}
+                {props.weeks ? <><label htmlFor="week">Select a week to view: </label><select name="week" onChange={handleWeekClick}>{ weekTitles }</select></> : <h3>Loading...</h3>}
             </div>
             <WeekShow week={selectedWeek} />
         </section>
