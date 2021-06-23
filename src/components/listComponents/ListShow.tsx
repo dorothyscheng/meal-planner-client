@@ -1,7 +1,7 @@
 import React from 'react';
 
 import List from '../../models/List.interface';
-// import RecipeCard from '../recipeComponents/RecipeCard';
+import RecipeCard from '../recipeComponents/RecipeCard';
 import EditList from './EditList';
 
 interface Props {
@@ -43,7 +43,7 @@ class ListShow extends React.Component<Props, State> {
     }
 
     render(): JSX.Element {
-        // const recipeCards = this.props.list.recipes.map(recipe => <RecipeCard recipe={recipe} />)
+        const recipeCards = this.props.list.recipes.map(recipe => <RecipeCard key={recipe._links.self.href} recipe={recipe} />)
         return (
             <div className="list-show">
                 <div className="list-show-title">
@@ -55,7 +55,7 @@ class ListShow extends React.Component<Props, State> {
                         handleUpdateList={this.props.handleUpdateList} />
                 </div>
                 <div className="list-show-recipes">
-                    {/* { recipeCards.length === 0 && recipeCards } */}
+                    { recipeCards.length !== 0 && recipeCards }
                 </div>
                 <div className="actions">
                     <p className="btn cancel-btn" onClick={this.showEditList}>Edit</p>

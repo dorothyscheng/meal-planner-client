@@ -7,7 +7,7 @@ import { RecipeLong } from '../../models/Recipe.interface';
 
 interface Props {
     recipe: RecipeLong,
-    showListListModal: (recipe: RecipeLong) => void,
+    showListListModal?: (recipe: RecipeLong) => void,
 }
 
 const RecipeCard = (props: Props): JSX.Element => {
@@ -36,7 +36,7 @@ const RecipeCard = (props: Props): JSX.Element => {
         <div className="recipe-card-link" onClick={redirectLink}>
             <div className="card recipe-card" style={style}>
                 <h3 className="recipe-title">{props.recipe.recipe.label}</h3>
-                { props.showListListModal && <i className="fas fa-plus-circle" onClick={() => props.showListListModal(props.recipe)}></i> }
+                { props.showListListModal && <i className="fas fa-plus-circle" onClick={() => {if (props.showListListModal) {props.showListListModal(props.recipe)}}}></i> }
             </div>
         </div>
     );

@@ -277,7 +277,9 @@ footer {
 .recipe-card-link {
   width: 20%;
   margin: 10px;
+  cursor: pointer;
   transition: all .3s;
+  flex: 0 0 auto;
 }
 .recipe-card {
   display: flex;
@@ -362,7 +364,11 @@ footer {
 }
 .list-show-recipes {
   display: flex;
+  flex-wrap: nowrap;
   margin-left: 20px;
+  justify-content: flex-start;
+  width: 70%;
+  overflow-x: auto;
 }
 .underline {
   text-decoration: underline;
