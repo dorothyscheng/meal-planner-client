@@ -5,4 +5,6 @@ export default interface List {
     name: string,
     recipes: RecipeLong[],
     _id?: string,
+    createdAt?: string,
+    updatedAt?: string,
 }

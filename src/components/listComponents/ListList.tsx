@@ -45,9 +45,16 @@ const ListList = (props: Props): JSX.Element => {
 
     let listTitles;
     if (props.lists) {
+        props.lists.sort((a,b) => {
+            if (a.createdAt && b.createdAt) {
+               return Date.parse(a.createdAt) - Date.parse(b.createdAt)
+            } else {
+                return 0;
+            }
+        });
         listTitles = props.lists.map(list => {
             return (
-                <h3 className="list-label" id={list._id} onClick={handleSelect}>{list.name} ({list.recipes.length} recipes)</h3>
+                <h3 className="list-label" key={list._id} id={list._id} onClick={handleSelect}>{list.name} ({list.recipes.length} recipes)</h3>
             )
         })
     }

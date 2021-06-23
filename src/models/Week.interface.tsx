@@ -24,4 +24,6 @@ export default interface Week {
     sundayL: RecipeLong,
     sundayD: RecipeLong,
     _id?: string,
+    createdAt?: string,
+    updatedAt?: string,
 }
