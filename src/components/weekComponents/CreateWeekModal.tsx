@@ -47,7 +47,7 @@ class CreateWeekModal extends React.Component<Props, State> {
         const months = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
         let month: string|number = now.getMonth();
         month = months[month];
-        const days = ['Sun', 'Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat'];
+        const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
         let day: string|number = now.getDay();
         day = days[day];
         const date = now.getDate();
@@ -62,7 +62,7 @@ class CreateWeekModal extends React.Component<Props, State> {
         const months = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
         let month: string|number = now.getMonth();
         month = months[month];
-        const days = ['Sun', 'Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat'];
+        const days = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
         let day: string|number = now.getDay();
         day = days[day];
         const date = now.getDate();

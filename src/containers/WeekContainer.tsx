@@ -12,7 +12,6 @@ const WeekContainer = (props: Props): JSX.Element => {
     const handleWeekClick = (e: React.MouseEvent): void => {
         const target = e.target as Element;
         const weekId = target.getAttribute('id');
-        // target.className += ' selected';
         if (props.weeks) {
             setSelectedWeek(props.weeks.filter(week => week._id === weekId)[0]);
         }

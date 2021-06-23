@@ -8,6 +8,7 @@ import UserDashboard from '../components/userComponents/UserDashboard';
 import UserEdit from '../components/userComponents/UserEdit';
 import List from '../models/List.interface';
 import Week from '../models/Week.interface';
+import EditWeek from '../components/weekComponents/EditWeek';
 
 interface Props {
   user: User | null,
@@ -43,6 +44,7 @@ const Routes = (props: Props): JSX.Element => {
         handleDeleteList={handleDeleteList}
         handleCreateWeek={handleCreateWeek}/>}/>
       <Route path='/dashboard/edit' render={(props) => <UserEdit {...props} user={user} handleUserEdit={handleUserEdit} />} />
+      <Route path='/dashboard/:weekId/edit' render={(props) => <EditWeek {...props} user={user} />} />
     </Switch>
   )
     return (

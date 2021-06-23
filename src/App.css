@@ -397,10 +397,16 @@ footer {
 .week-show-container {
   width: 90%;
   padding: 5px;
-  border: 1px solid black;
+  /* background-color: rgba(56, 102, 65, .7); */
+  background-color: rgba(167, 201, 87, .7);
+  border-radius: 2px;
+  /* color: #fff; */
 }
 .week-show-title {
-  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px
 }
 .week-show-table {
   width: 100%;
@@ -427,4 +433,21 @@ th {
 }
 .list-label:hover {
   background-color: #a7c957;
+}
+/* WEEK EDIT */
+.week-edit-container {
+  width: 90%;
+  margin: 0 auto;
+}
+.list-holder {
+  width: 25%;
+}
+.recipe-holder {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.recipe-holder .recipe-card-link {
+  width: 48%;
+  margin: 2px;
 }
