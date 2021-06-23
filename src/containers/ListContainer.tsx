@@ -15,8 +15,7 @@ const ListContainer = (props: Props): JSX.Element => {
             key={list._id} 
             list={list} 
             handleUpdateList={props.handleUpdateList}
-            handleDeleteList={props.handleDeleteList}
-            username={props.username} />)
+            handleDeleteList={props.handleDeleteList} />)
     }
     return (
         <section className="dash-section lists">

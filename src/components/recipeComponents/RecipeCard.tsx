@@ -8,6 +8,7 @@ import { RecipeLong } from '../../models/Recipe.interface';
 interface Props {
     recipe: RecipeLong,
     showListListModal?: (recipe: RecipeLong) => void,
+    removeRecipeFromList?: (recipe: RecipeLong) => void,
 }
 
 const RecipeCard = (props: Props): JSX.Element => {
@@ -15,7 +16,7 @@ const RecipeCard = (props: Props): JSX.Element => {
 
     const redirectLink = (e: React.MouseEvent): void => {
         const target = e.target as Element;
-        if (target.className === 'card recipe-card') {
+        if (target.className === 'card recipe-card' || target.className === 'recipe-title') {
             setRedirect(true);
         };
     };
@@ -36,6 +37,7 @@ const RecipeCard = (props: Props): JSX.Element => {
         <div className="recipe-card-link" onClick={redirectLink}>
             <div className="card recipe-card" style={style}>
                 <h3 className="recipe-title">{props.recipe.recipe.label}</h3>
+                { props.removeRecipeFromList && <i className="fas fa-trash-alt" onClick={() => {if (props.removeRecipeFromList) {props.removeRecipeFromList(props.recipe)}}}></i> }
                 { props.showListListModal && <i className="fas fa-plus-circle" onClick={() => {if (props.showListListModal) {props.showListListModal(props.recipe)}}}></i> }
             </div>
         </div>

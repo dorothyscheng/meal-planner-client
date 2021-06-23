@@ -289,7 +289,7 @@ footer {
   object-fit: cover;
   position: relative;
 }
-.fa-plus-circle {
+.fa-plus-circle, .fa-trash-alt {
   margin: 10px;
   color: rgba(0,0,0,.7);
   position: absolute;
@@ -298,7 +298,7 @@ footer {
   padding: 5px;
   transition: all .3s;
 }
-.fa-plus-circle:hover {
+.fa-plus-circle:hover, .fa-trash-alt:hover {
   color: #000;
   transform: scale(1.5);
 }
@@ -362,6 +362,9 @@ footer {
   align-items: center;
   justify-content: space-between;
 }
+.list-show-title {
+  width: 5%;
+}
 .list-show-recipes {
   display: flex;
   flex-wrap: nowrap;
@@ -374,11 +377,13 @@ footer {
   text-decoration: underline;
 }
 .list-edit-form {
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  flex-direction: column;
+  width: fit-content;
 }
-.list-edit-form label, input {
-  margin: 0 5px 0 0;
+.list-edit-form input {
+  margin: 2px 0 5px 0;
 }
 /* LIST MODAL */
 .list-label {

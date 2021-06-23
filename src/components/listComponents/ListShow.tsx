@@ -3,12 +3,12 @@ import React from 'react';
 import List from '../../models/List.interface';
 import RecipeCard from '../recipeComponents/RecipeCard';
 import EditList from './EditList';
+import { RecipeLong } from '../../models/Recipe.interface';
 
 interface Props {
     list: List,
     handleUpdateList: (list: List) => void,
     handleDeleteList: (list: List) => void,
-    username: string,
 }
 
 interface State {
@@ -37,13 +37,27 @@ class ListShow extends React.Component<Props, State> {
             name: this.props.list.name,
             recipes: this.props.list.recipes,
             _id: this.props.list._id,
-            username: this.props.username,
+            username: this.props.list.username,
         };
         this.props.handleDeleteList(listToDelete);
     }
 
+    removeRecipeFromList = (recipeToRemove: RecipeLong): void => {
+        let recipes = this.props.list.recipes.filter(recipe => recipe._links.self.href !== recipeToRemove._links.self.href);
+        const listToUpdate = {
+            name: this.props.list.name,
+            recipes: recipes,
+            _id: this.props.list._id,
+            username: this.props.list.username,
+        };
+        this.props.handleUpdateList(listToUpdate);
+    }
+
     render(): JSX.Element {
-        const recipeCards = this.props.list.recipes.map(recipe => <RecipeCard key={recipe._links.self.href} recipe={recipe} />)
+        const recipeCards = this.props.list.recipes.map(recipe => <RecipeCard 
+            key={recipe._links.self.href} 
+            recipe={recipe}
+            removeRecipeFromList={this.removeRecipeFromList} />)
         return (
             <div className="list-show">
                 <div className="list-show-title">
