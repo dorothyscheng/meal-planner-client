@@ -7,6 +7,7 @@ import User from '../models/User.interface';
 import UserDashboard from '../components/userComponents/UserDashboard';
 import UserEdit from '../components/userComponents/UserEdit';
 import List from '../models/List.interface';
+import Week from '../models/Week.interface';
 
 interface Props {
   user: User | null,
@@ -17,6 +18,7 @@ interface Props {
   handleCreateList: (list: List) => void,
   handleUpdateList: (list: List) => void,
   handleDeleteList: (list: List) => void,
+  handleCreateWeek: (week: Week) => void,
 }
 
 const Routes = (props: Props): JSX.Element => {
@@ -28,6 +30,7 @@ const Routes = (props: Props): JSX.Element => {
   const handleCreateList = props.handleCreateList;
   const handleUpdateList = props.handleUpdateList;
   const handleDeleteList = props.handleDeleteList;
+  const handleCreateWeek = props.handleCreateWeek;
   const protectedRoutes = (
     <Switch>
       <Route exact path='/dashboard' render={(props) => <UserDashboard 
@@ -37,7 +40,8 @@ const Routes = (props: Props): JSX.Element => {
         handleUserDelete={handleUserDelete}
         handleCreateList={handleCreateList} 
         handleUpdateList={handleUpdateList}
-        handleDeleteList={handleDeleteList}/>}/>
+        handleDeleteList={handleDeleteList}
+        handleCreateWeek={handleCreateWeek}/>}/>
       <Route path='/dashboard/edit' render={(props) => <UserEdit {...props} user={user} handleUserEdit={handleUserEdit} />} />
     </Switch>
   )

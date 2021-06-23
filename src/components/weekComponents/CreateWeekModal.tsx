@@ -1,6 +1,6 @@
 import React from 'react';
 
-import List from '../../models/List.interface';
+import Week from '../../models/Week.interface';
 
 interface Style {
     display: 'none' | 'block',
@@ -8,8 +8,8 @@ interface Style {
 
 interface Props {
     display: boolean,
-    hideCreateListModal: () => void,
-    handleCreateList: (list: List) => void,
+    hideCreateWeekModal: () => void,
+    handleCreateWeek: (week: Week) => void,
     username: string,
 }
 
@@ -17,7 +17,7 @@ interface State {
     name: string,
 }
 
-class CreateListModal extends React.Component<Props, State> {
+class CreateWeekModal extends React.Component<Props, State> {
     state: State = {
         name: '',
     }
@@ -25,7 +25,7 @@ class CreateListModal extends React.Component<Props, State> {
     handleClose = (e: React.MouseEvent) => {
         const target = e.target as Element;
         if (target.className === 'modal-container' || target.className === 'btn cancel-btn') {
-            this.props.hideCreateListModal();
+            this.props.hideCreateWeekModal();
         };
     }
 
@@ -37,16 +37,39 @@ class CreateListModal extends React.Component<Props, State> {
 
     handleSubmit = (e: React.FormEvent): void => {
         e.preventDefault();
-        const newList = {
+        const newWeek = {
             username: this.props.username,
             name: this.state.name,
-            recipes: [],
         }
-        this.props.handleCreateList(newList);
-        this.props.hideCreateListModal();
+        this.props.handleCreateWeek(newWeek);
+        this.props.hideCreateWeekModal();
+        const now = new Date();
+        const months = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+        let month: string|number = now.getMonth();
+        month = months[month];
+        const days = ['Sun', 'Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat'];
+        let day: string|number = now.getDay();
+        day = days[day];
+        const date = now.getDate();
+        const year = now.getFullYear();
         this.setState({
-            name: '',
-        })
+            name: `${day}, ${month} ${date}, ${year}`,
+        });
+    }
+
+    componentDidMount() {
+        const now = new Date();
+        const months = ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+        let month: string|number = now.getMonth();
+        month = months[month];
+        const days = ['Sun', 'Mon', 'Tues', 'Weds', 'Thurs', 'Fri', 'Sat'];
+        let day: string|number = now.getDay();
+        day = days[day];
+        const date = now.getDate();
+        const year = now.getFullYear();
+        this.setState({
+            name: `${day}, ${month} ${date}, ${year}`,
+        });
     }
 
     render(): JSX.Element {
@@ -62,7 +85,7 @@ class CreateListModal extends React.Component<Props, State> {
             <div className="modal-container" style={style} onClick={this.handleClose}>
                 <div className="modal-content">
                     <form className="form">
-                        <label htmlFor="username">What do you want to call your list?</label>
+                        <label htmlFor="username">What do you want to call your week?</label>
                         <input 
                             className="last-input"
                             name="username" 
@@ -80,4 +103,4 @@ class CreateListModal extends React.Component<Props, State> {
     }
 }
 
-export default CreateListModal;
+export default CreateWeekModal;

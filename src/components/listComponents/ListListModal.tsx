@@ -14,7 +14,7 @@ interface Props {
     handleUpdateList: (list: List) => void,
 }
 
-const ListList = (props: Props): JSX.Element => {
+const ListListModal = (props: Props): JSX.Element => {
     let style: Style = {
         display: 'none',
     }
@@ -80,4 +80,4 @@ const ListList = (props: Props): JSX.Element => {
     );
 }
 
-export default ListList;
+export default ListListModal;

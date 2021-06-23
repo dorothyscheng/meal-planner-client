@@ -52,6 +52,7 @@ label {
 /* MODAL */
 .modal-container {
   background-color: rgba(188,71,73,.7);
+  /* background-color: rgba(56, 102, 65, .7); */
   position: fixed;
   top: 0;
   left: 0;
@@ -62,6 +63,7 @@ label {
 }
 .modal-content {
   background-color: #fff;
+  /* border: 3px solid #bc4749; */
   margin: 5% auto;
   padding: 20px;
   width: 50%;
@@ -327,9 +329,15 @@ footer {
   justify-content: space-between;
   align-items: center;
 }
+.dashboard-section-title {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  align-items: center;
+}
 .dashboard-title {
   font-family: 'Homemade Apple', cursive;
-  margin-top: 20px;
+  margin: 20px 20px 0 0;
   text-align: left;
 }
 .delete-btn:hover {
@@ -384,6 +392,32 @@ footer {
 }
 .list-edit-form input {
   margin: 2px 0 5px 0;
+}
+/* WEEK SHOW */
+.week-show-container {
+  width: 90%;
+  padding: 5px;
+  border: 1px solid black;
+}
+.week-show-title {
+  text-align: center;
+}
+.week-show-table {
+  width: 100%;
+}
+td {
+  text-align: center;
+  height: 100px;
+  width: 100px;
+}
+th {
+  font-size: 20px;
+}
+.meal-title {
+  /* transform: rotate(-90deg); */
+  width: 25px;
+  font-weight: bold;
+  font-size: 40px;
 }
 /* LIST MODAL */
 .list-label {

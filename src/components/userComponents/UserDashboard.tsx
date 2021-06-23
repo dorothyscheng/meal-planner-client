@@ -6,6 +6,9 @@ import UserDeleteModal from './UserDeleteModal';
 import ListContainer from '../../containers/ListContainer';
 import CreateListModal from '../listComponents/CreateListModal';
 import List from '../../models/List.interface';
+import Week from '../../models/Week.interface';
+import CreateWeekModal from '../weekComponents/CreateWeekModal';
+import WeekContainer from '../../containers/WeekContainer';
 
 interface Style {
     display: 'none' | 'flex' | 'block',
@@ -18,6 +21,7 @@ interface Props {
     handleCreateList: (list: List) => void,
     handleUpdateList: (list: List) => void,
     handleDeleteList: (list: List) => void,
+    handleCreateWeek: (week: Week) => void,
 }
 
 interface State {
@@ -25,6 +29,7 @@ interface State {
     deleteModalDisplay: boolean,
     messageDisplay: boolean,
     createListModalDisplay: boolean,
+    createWeekModalDisplay: boolean,
 }
 
 class UserDashboard extends React.Component<Props, State> {
@@ -33,6 +38,7 @@ class UserDashboard extends React.Component<Props, State> {
         deleteModalDisplay: false,
         messageDisplay: false,
         createListModalDisplay: false,
+        createWeekModalDisplay: false,
     }
 
     handleDelete = (): void => {
@@ -74,6 +80,18 @@ class UserDashboard extends React.Component<Props, State> {
         })
     }
 
+    showCreateWeekModal = (): void => {
+        this.setState({
+            createWeekModalDisplay: true,
+        })
+    }
+
+    hideCreateWeekModal = (): void => {
+        this.setState({
+            createWeekModalDisplay: false,
+        })
+    }
+
     componentDidMount() {
         if (this.props.message) {
             this.setState({
@@ -112,9 +130,11 @@ class UserDashboard extends React.Component<Props, State> {
                         <p className="dismiss-message" onClick={this.dismissMessage}>Dismiss</p>
                     </div>
                 )}
-                <div className="dashboard-title-container">
+                <div className="dashboard-section-title">
                     <h2 className="dashboard-title">My Lists</h2>
-                    <p className="btn submit-btn" onClick={this.showCreateListModal}>New List</p>
+                    <div className="actions">
+                        <p className="btn submit-btn" onClick={this.showCreateListModal}>New List</p>
+                    </div>
                 </div>
                 <CreateListModal 
                     display={this.state.createListModalDisplay} 
@@ -126,6 +146,19 @@ class UserDashboard extends React.Component<Props, State> {
                     handleUpdateList={this.props.handleUpdateList}
                     handleDeleteList={this.props.handleDeleteList}
                     username={this.props.user.username} />
+                <div className="dashboard-section-title">
+                    <h2 className="dashboard-title">My Weeks</h2>
+                    <div className="actions">
+                        <p className="btn submit-btn" onClick={this.showCreateWeekModal}>New Week</p>
+                    </div>
+                </div>
+                <CreateWeekModal 
+                display={this.state.createWeekModalDisplay}
+                hideCreateWeekModal={this.hideCreateWeekModal}
+                handleCreateWeek={this.props.handleCreateWeek}
+                username={this.props.user.username} />
+                <WeekContainer
+                    weeks={this.props.user.weeks ? this.props.user.weeks : null} />
             </div>
         );
     }

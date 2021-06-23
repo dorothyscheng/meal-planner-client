@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router';
 import { RecipeLong } from '../models/Recipe.interface';
 import RecipeCard from '../components/recipeComponents/RecipeCard';
 import RecipeModel from '../models/RecipeModel';
-import ListList from '../components/listComponents/ListList';
+import ListListModal from '../components/listComponents/ListListModal';
 import List from '../models/List.interface';
 
 interface Props extends RouteComponentProps {
@@ -92,7 +92,7 @@ class RecipeContainer extends React.Component<Props, State> {
                 <div className="card-container recipe-container">
                     { recipeCards }
                 </div>
-                <ListList 
+                <ListListModal 
                     display={this.state.showListListModal} 
                     hideListListModal={this.hideListListModal}
                     recipe={this.state.selectedRecipe}

@@ -8,6 +8,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import List from './models/List.interface';
 import ListModel from './models/ListModel';
+import Week from './models/Week.interface';
+import WeekModel from './models/WeekModel';
 
 import './App.css';
 
@@ -37,6 +39,10 @@ class App extends React.Component<{}, State> {
   }
 
   isListError = (response: errorMessage | List): response is errorMessage => {
+    return (response as errorMessage).message !== undefined;
+  }
+
+  isWeekError = (response: errorMessage | Week): response is errorMessage => {
     return (response as errorMessage).message !== undefined;
   }
   
@@ -208,6 +214,28 @@ class App extends React.Component<{}, State> {
       });
   }
 
+  handleCreateWeek = (week: Week): void => {
+    WeekModel.create(week)
+      .then(response => {
+        if (this.isWeekError(response)) {
+          this.setState({
+            updateMessage: response.message,
+          });
+        } else {
+          if (this.state.user) {
+            let user = this.state.user;
+            if (!user.weeks) {
+              user.weeks = [];
+            };
+            user.weeks.push(response);
+            this.setState({
+              user: user,
+            });
+          };
+        };
+      });
+  }
+
   fetchUserData = (username: User['username']): void => {
     UserModel.show(username)
       .then(response => {
@@ -256,7 +284,8 @@ class App extends React.Component<{}, State> {
               auth={this.state.user ? this.state.user.username : null}
               handleCreateList={this.handleCreateList}
               handleUpdateList={this.handleUpdateList}
-              handleDeleteList={this.handleDeleteList} />
+              handleDeleteList={this.handleDeleteList}
+              handleCreateWeek={this.handleCreateWeek} />
           </Router>
         </div>
         <Footer />
