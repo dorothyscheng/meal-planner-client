@@ -381,6 +381,12 @@ footer {
   width: 70%;
   overflow-x: auto;
 }
+.list-show-recipes .recipe-card-link {
+  width: 15%;
+}
+.list-show-recipes .recipe-title {
+  font-size: 16px;
+}
 .underline {
   text-decoration: underline;
 }
@@ -450,4 +456,13 @@ th {
 .recipe-holder .recipe-card-link {
   width: 48%;
   margin: 2px;
+}
+.recipe-holder .recipe-title{
+  font-size: 16px;
+}
+.list-names {
+  margin: 10px 0 20px 0;
+}
+.list-holder label {
+  margin-right: 10px;
 }
