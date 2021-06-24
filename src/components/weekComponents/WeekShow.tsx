@@ -17,13 +17,25 @@ const WeekShow = (props: Props): JSX.Element => {
     if (props.recipeEquipped) {
         tdClass = "available";
     };
+    const editDeleteButtons = (
+        <>
+            <Link className="btn cancel-btn" to={`/dashboard/${props.week._id}/edit`}>Edit</Link>
+            <p className="btn delete-btn">Delete</p>
+        </>
+    );
+    const saveButton = <p className="btn submit-btn">Save</p>;
+    const weekNameInput = (
+        <>
+            <label htmlFor="week-name">Week Name: </label>
+            <input type="text" name="week-name" placeholder={props.week.name} />
+        </>
+    )
     return (
         <div className="week-show-container">
             <div className="week-show-title">
-                <h2>{props.week.name}</h2>
+                <h2>{props.origin ? weekNameInput: props.week.name }</h2>
                 <div className="actions">
-                    <Link className="btn cancel-btn" to={`/dashboard/${props.week._id}/edit`}>Edit</Link>
-                    <p className="btn delete-btn">Delete</p>
+                    { props.origin ? saveButton : editDeleteButtons }
                 </div>
             </div>
             <table className="week-show-table">

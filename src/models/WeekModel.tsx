@@ -18,6 +18,16 @@ class WeekModel {
             return error;
         }
     }
+
+    static update = async (week: Week): Promise<Week | errorMessage> => {
+        try {
+            const response: AxiosResponse = await axios.put<Week>(`${endPoint}/${week._id}`, week);
+            return response.data;
+        } catch (err: unknown) {
+            const error = err as AxiosError;
+            return error;
+        }
+    }
 }
 
 export default WeekModel;
