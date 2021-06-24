@@ -5,6 +5,7 @@ import User from '../../models/User.interface';
 import Week from '../../models/Week.interface';
 import List from '../../models/List.interface';
 import EditWeekListShow from './EditWeek.ListShow';
+import WeekShow from './WeekShow';
 
 interface Params {
     weekId: string,
@@ -66,14 +67,17 @@ class EditWeek extends React.Component<Props, State> {
 
         return (
             <div className="week-edit-container">
-                <h2>Editing: {this.state.week.name}</h2>
-                <div className="list-holder">
-                    <label htmlFor="list-name">Select a list:</label>
-                    <select name="list-name" id="list-name" className="list-names" onChange={this.handleListSelect}>
-                        { lists }
-                    </select>
-                    <EditWeekListShow list={this.state.selectedList} />
+                <div className="week-edit-list-container">
+                    <h2>Editing: {this.state.week.name}</h2>
+                    <div className="list-holder">
+                        <label htmlFor="list-name">Select a list:</label>
+                        <select name="list-name" id="list-name" className="list-names" onChange={this.handleListSelect}>
+                            { lists }
+                        </select>
+                        <EditWeekListShow list={this.state.selectedList} />
+                    </div>
                 </div>
+                <WeekShow week={this.state.week} />
             </div>
         );
     }
