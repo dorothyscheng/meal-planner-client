@@ -11,6 +11,7 @@ interface Props {
     removeRecipeFromList?: (recipe: RecipeLong) => void,
     handleRecipeSelect?: (e: React.MouseEvent) => void,
     selected?: boolean,
+    origin?: string,
 }
 
 const RecipeCard = (props: Props): JSX.Element => {
@@ -46,11 +47,15 @@ const RecipeCard = (props: Props): JSX.Element => {
     if (props.handleRecipeSelect) {
         clickFunction = props.handleRecipeSelect;
     }
+    if (props.origin) {
+        clickFunction = ()=> {};
+    }
 
     return (
         <div className={recipeCardLinkClass} onClick={clickFunction}>
             <div className="card recipe-card" style={style}>
                 <h3 className="recipe-title">{props.recipe.recipe.label}</h3>
+                { props.origin && <i className="fas fa-trash-alt"></i> }
                 { props.removeRecipeFromList && <i className="fas fa-trash-alt" onClick={() => {if (props.removeRecipeFromList) {props.removeRecipeFromList(props.recipe)}}}></i> }
                 { props.showListListModal && <i className="fas fa-plus-circle" onClick={() => {if (props.showListListModal) {props.showListListModal(props.recipe)}}}></i> }
             </div>

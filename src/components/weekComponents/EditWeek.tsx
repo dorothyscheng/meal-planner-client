@@ -70,16 +70,30 @@ class EditWeek extends React.Component<Props, State> {
         }
     }
 
-    handleMealSelect = (e: React.MouseEvent): void => {
+    handleMealSelectOrRemove = (e: React.MouseEvent): void => {
+        const target = e.target as Element;
+        const meal = target.getAttribute('id') as 'mondayB' | 'tuesdayB' | 'wednesdayB' | 'thursdayB' | 'fridayB' | 'saturdayB' | 'sundayB' | 'mondayL' | 'tuesdayL' | 'wednesdayL' | 'thursdayL' | 'fridayL' | 'saturdayL' | 'sundayL' | 'mondayD' | 'tuesdayD' | 'wednesdayD' | 'thursdayD' | 'fridayD' | 'saturdayD' | 'sundayD';
         if (this.state.selectedRecipe) {
-            const target = e.target as Element;
-            const meal = target.getAttribute('id') as 'mondayB' | 'tuesdayB' | 'wednesdayB' | 'thursdayB' | 'fridayB' | 'saturdayB' | 'sundayB' | 'mondayL' | 'tuesdayL' | 'wednesdayL' | 'thursdayL' | 'fridayL' | 'saturdayL' | 'sundayL' | 'mondayD' | 'tuesdayD' | 'wednesdayD' | 'thursdayD' | 'fridayD' | 'saturdayD' | 'sundayD';
             if (this.state.week) {
                 let week = this.state.week;
                 week[meal] = this.state.selectedRecipe;
                 this.setState({
                     week: week,
                 });
+            };
+        } else {
+            if (target.className === 'fas fa-trash-alt') {
+                const parent = target.parentElement as Element;
+                const grandparent = parent.parentElement as Element;
+                const holder = grandparent.parentElement as Element;
+                const mealToRemove = holder.getAttribute('id') as 'mondayB' | 'tuesdayB' | 'wednesdayB' | 'thursdayB' | 'fridayB' | 'saturdayB' | 'sundayB' | 'mondayL' | 'tuesdayL' | 'wednesdayL' | 'thursdayL' | 'fridayL' | 'saturdayL' | 'sundayL' | 'mondayD' | 'tuesdayD' | 'wednesdayD' | 'thursdayD' | 'fridayD' | 'saturdayD' | 'sundayD';
+                if (this.state.week) {
+                    let week = this.state.week;
+                    delete week[mealToRemove];
+                    this.setState({
+                        week: week,
+                    });
+                };
             };
         };
     }
@@ -115,7 +129,8 @@ class EditWeek extends React.Component<Props, State> {
                 <WeekShow 
                     week={this.state.week}
                     recipeEquipped={ Boolean(this.state.selectedRecipe) }
-                    handleMealSelect={this.handleMealSelect} />
+                    handleMealSelectOrRemove={this.handleMealSelectOrRemove}
+                    origin='editWeek' />
             </div>
         );
     }
