@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
 import Week from '../../models/Week.interface';
@@ -14,6 +14,10 @@ interface Props {
 
 const WeekShow = (props: Props): JSX.Element => {
     const [redirect, setRedirect] = useState(false);
+    const [weekName, setWeekName] = useState<any>(props.week?.name);
+    useEffect(() => {
+        setWeekName(props.week?.name);
+    }, [props.week])
     if (redirect) return <Redirect to='/dashboard' />
     if (!props.week) return <h3>Loading...</h3>;
 
@@ -31,18 +35,20 @@ const WeekShow = (props: Props): JSX.Element => {
     const handleSubmit = (): void => {
         if (props.week && props.handleUpdateWeek) {
             const weekNameInput = document.getElementById('week-name') as HTMLInputElement;
-            let weekName = props.week.name;
+            // let weekName = props.week.name;
             if (weekNameInput && weekNameInput.value) {
-                weekName = weekNameInput.value;
+                // weekName = weekNameInput.value;
+                console.log(weekNameInput.value);
+                setWeekName(weekNameInput.value);
+                setRedirect(true);
             }
             props.handleUpdateWeek({
                 ...props.week,
-                name: weekName,
+                name: weekNameInput.value,
             });
-            setRedirect(true);
         };
     };
-    
+
     const saveButton = <p className="btn submit-btn" onClick={handleSubmit}>Save</p>;
     const weekNameInput = (
         <>
@@ -51,11 +57,10 @@ const WeekShow = (props: Props): JSX.Element => {
         </>
     )
 
-
     return (
         <div className="week-show-container">
             <div className="week-show-title">
-                <h2>{props.handleUpdateWeek ? weekNameInput: props.week.name }</h2>
+                <h2>{props.handleUpdateWeek ? weekNameInput: weekName}</h2>
                 <div className="actions">
                     { props.handleUpdateWeek ? saveButton : editDeleteButtons }
                 </div>

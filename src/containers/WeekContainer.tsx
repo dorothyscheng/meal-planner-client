@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Week from '../models/Week.interface';
 import WeekShow from '../components/weekComponents/WeekShow';
 
@@ -7,7 +7,7 @@ interface Props {
 }
 
 const WeekContainer = (props: Props): JSX.Element => {
-    const [selectedWeek, setSelectedWeek] = useState(props.weeks ? props.weeks[0] : null);
+    const [selectedWeek, setSelectedWeek] = useState<Week | null>(props.weeks ? props.weeks[0] : null);
 
     const handleWeekClick = (e: React.ChangeEvent<HTMLSelectElement>): void => {
         const weekId = e.target.value;
@@ -27,11 +27,11 @@ const WeekContainer = (props: Props): JSX.Element => {
         });
         weekTitles = props.weeks.map(week => {
             return (
-                    <option className="list-label" key={week._id} value={week._id}>{week.name}</option>
-            )
-        })
+                <option className="list-label" key={week._id} value={week._id}>{week.name}</option>
+            );
+        });
     }
-
+    
     return (
         <section className="dash-section">
             <div className="week-titles">
