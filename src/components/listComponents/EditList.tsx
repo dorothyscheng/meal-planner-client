@@ -1,5 +1,6 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import List from '../../models/List.interface';
+import { RecipeLong } from '../../models/Recipe.interface';
 
 interface Style {
     display: 'none' | 'flex',
@@ -12,79 +13,66 @@ interface Props {
     handleUpdateList: (list: List) => void,
 }
 
-interface State {
-    name: List['name'],
-    recipes: List['recipes'],
-    _id: List['_id'],
-    username: List['username'];
-}
+const EditList = (props: Props): JSX.Element => {
+    const [name, setName] = useState('');
+    const [recipes, setRecipes] = useState<RecipeLong[] | []>([]);
+    const [_id, setId] = useState('');
+    const [username, setUsername] = useState('');
 
-class EditList extends React.Component<Props, State> {
-    state: State = {
-        name: '',
-        recipes: [],
-        _id: '',
-        username: '',
+    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setName(e.target.value);
     }
 
-    handleNameChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        this.setState({
-            name: e.target.value,
-        })
-    }
-
-    handleClose = (): void => {
-        if (this.props.list) {
-            this.setState({
-                name: this.props.list.name,
-            });
-            this.props.hideEditList();
+    const handleClose = (): void => {
+        if (props.list) {
+            setName(props.list.name);
+            props.hideEditList();
         }
     }
 
-    handleSubmit = (e: React.FormEvent): void => {
+    const handleSubmit = (e: React.FormEvent): void => {
         e.preventDefault();
-        this.props.handleUpdateList(this.state);
-        this.props.hideEditList();
+        props.handleUpdateList({
+            name: name,
+            recipes: recipes,
+            _id: _id,
+            username: username,
+        });
+        props.hideEditList();
     }
 
-    componentDidMount() {
-        console.log('mounted: ', this.props.list);
-        if (this.props.list) {
-            this.setState({
-                name: this.props.list.name,
-                recipes: this.props.list.recipes,
-                _id: this.props.list._id,
-                username: this.props.list.username,
-            });
+    useEffect(() => {
+        if (props.list && props.list._id) {
+            setName(props.list.name);
+            setRecipes(props.list.recipes);
+            setId(props.list._id);
+            setUsername(props.list.username);
         }
-    }
+    }, [props.list])
 
-    render(): JSX.Element {
-        console.log(this.props);
-        let style: Style = {
-            display: 'none',
-        }
-        if (this.props.display) {
-            style = {
-                display: 'flex',
-            }
-        };
-        return (
-            <form className="list-edit-form" style={style}>
-                <label htmlFor="username">New List Name:</label>
-                    <input 
-                        name="username" 
-                        type="text"
-                        value={this.state.name}
-                        onChange={this.handleNameChange} />
-                    <div className="actions">
-                        <p className="btn cancel-btn" onClick={this.handleClose}>Close</p>
-                        <button className="submit-btn" onClick={this.handleSubmit}>Submit</button>
-                    </div>
-            </form>
-        )
+    let style: Style = {
+        display: 'none',
     }
+    if (props.display) {
+        style = {
+            display: 'flex',
+        }
+    };
+    return (
+        <form className="list-edit-form" style={style}>
+            <label htmlFor="username">New List Name:</label>
+                <input 
+                    name="username" 
+                    type="text"
+                    value={name}
+                    onChange={handleNameChange} />
+                <div className="actions">
+                    <p className="btn cancel-btn" onClick={handleClose}>Close</p>
+                    <button className="submit-btn" onClick={handleSubmit}>Submit</button>
+                </div>
+        </form>
+    )
+
 }
 
 export default EditList;
