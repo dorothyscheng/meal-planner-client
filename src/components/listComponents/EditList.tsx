@@ -8,7 +8,7 @@ interface Style {
 interface Props {
     display: boolean,
     hideEditList: () => void,
-    list: List,
+    list: List | null,
     handleUpdateList: (list: List) => void,
 }
 
@@ -34,10 +34,12 @@ class EditList extends React.Component<Props, State> {
     }
 
     handleClose = (): void => {
-        this.setState({
-            name: this.props.list.name,
-        });
-        this.props.hideEditList();
+        if (this.props.list) {
+            this.setState({
+                name: this.props.list.name,
+            });
+            this.props.hideEditList();
+        }
     }
 
     handleSubmit = (e: React.FormEvent): void => {
@@ -47,15 +49,19 @@ class EditList extends React.Component<Props, State> {
     }
 
     componentDidMount() {
-        this.setState({
-            name: this.props.list.name,
-            recipes: this.props.list.recipes,
-            _id: this.props.list._id,
-            username: this.props.list.username,
-        })
+        console.log('mounted: ', this.props.list);
+        if (this.props.list) {
+            this.setState({
+                name: this.props.list.name,
+                recipes: this.props.list.recipes,
+                _id: this.props.list._id,
+                username: this.props.list.username,
+            });
+        }
     }
 
     render(): JSX.Element {
+        console.log(this.props);
         let style: Style = {
             display: 'none',
         }

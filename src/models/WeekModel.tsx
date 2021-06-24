@@ -28,6 +28,16 @@ class WeekModel {
             return error;
         }
     }
+
+    static delete = async (week: Week): Promise<Week | errorMessage> => {
+        try {
+            const response: AxiosResponse = await axios.delete<Week>(`${endPoint}/${week._id}`);
+            return response.data;
+        } catch (err: unknown) {
+            const error = err as AxiosError;
+            return error;
+        }
+    }
 }
 
 export default WeekModel;

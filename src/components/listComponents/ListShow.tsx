@@ -54,6 +54,7 @@ class ListShow extends React.Component<Props, State> {
     }
 
     render(): JSX.Element {
+        // console.log(this.props);
         const recipeCards = this.props.list.recipes.map(recipe => <RecipeCard 
             key={recipe._links.self.href} 
             recipe={recipe}

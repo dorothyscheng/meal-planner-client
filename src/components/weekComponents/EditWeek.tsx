@@ -73,7 +73,20 @@ class EditWeek extends React.Component<Props, State> {
 
     handleMealSelectOrRemove = (e: React.MouseEvent): void => {
         const target = e.target as Element;
-        const meal = target.getAttribute('id') as 'mondayB' | 'tuesdayB' | 'wednesdayB' | 'thursdayB' | 'fridayB' | 'saturdayB' | 'sundayB' | 'mondayL' | 'tuesdayL' | 'wednesdayL' | 'thursdayL' | 'fridayL' | 'saturdayL' | 'sundayL' | 'mondayD' | 'tuesdayD' | 'wednesdayD' | 'thursdayD' | 'fridayD' | 'saturdayD' | 'sundayD';
+        let meal = target.getAttribute('id') as 'mondayB' | 'tuesdayB' | 'wednesdayB' | 'thursdayB' | 'fridayB' | 'saturdayB' | 'sundayB' | 'mondayL' | 'tuesdayL' | 'wednesdayL' | 'thursdayL' | 'fridayL' | 'saturdayL' | 'sundayL' | 'mondayD' | 'tuesdayD' | 'wednesdayD' | 'thursdayD' | 'fridayD' | 'saturdayD' | 'sundayD';
+        switch (target.className) {
+            case ('card recipe-card'):
+                const cardLink = target.parentElement as Element;
+                const td = cardLink.parentElement as Element;
+                meal = td.getAttribute('id') as 'mondayB' | 'tuesdayB' | 'wednesdayB' | 'thursdayB' | 'fridayB' | 'saturdayB' | 'sundayB' | 'mondayL' | 'tuesdayL' | 'wednesdayL' | 'thursdayL' | 'fridayL' | 'saturdayL' | 'sundayL' | 'mondayD' | 'tuesdayD' | 'wednesdayD' | 'thursdayD' | 'fridayD' | 'saturdayD' | 'sundayD';
+                break;
+            case ('recipe-title'):
+                const recipeCard = target.parentElement as Element;
+                const recipeCardLink = recipeCard.parentElement as Element;
+                const recipeTd = recipeCardLink.parentElement as Element;
+                meal = recipeTd.getAttribute('id') as 'mondayB' | 'tuesdayB' | 'wednesdayB' | 'thursdayB' | 'fridayB' | 'saturdayB' | 'sundayB' | 'mondayL' | 'tuesdayL' | 'wednesdayL' | 'thursdayL' | 'fridayL' | 'saturdayL' | 'sundayL' | 'mondayD' | 'tuesdayD' | 'wednesdayD' | 'thursdayD' | 'fridayD' | 'saturdayD' | 'sundayD';
+                break;
+        }
         if (this.state.selectedRecipe) {
             if (this.state.week) {
                 let week = this.state.week;
@@ -113,7 +126,6 @@ class EditWeek extends React.Component<Props, State> {
             });
             lists = this.props.user.lists.map(list => <option key={list._id} value={list._id}>{list.name}</option>)
         }
-
 
         return (
             <div className="week-edit-container">

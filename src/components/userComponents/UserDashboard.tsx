@@ -99,11 +99,7 @@ class UserDashboard extends React.Component<Props, State> {
             })
         }
     }
-
-    // componentDidUpdate(prevProps: Props, prevState: State) {
-    //     this.forceUpdate();
-    // }
-
+    
     render(): JSX.Element {
         let style: Style = {
             display: 'none',

@@ -194,14 +194,13 @@ class App extends React.Component<{}, State> {
   handleDeleteList = (list: List): void => {
     ListModel.delete(list)
       .then(response => {
-        console.log(response);
         if (this.isListError(response)) {
           this.setState({
             updateMessage: response.message,
           });
         } else {
           if (this.state.user) {
-            let user = this.state.user;
+            let user = {...this.state.user};
             if (!user.lists) {
               user.lists = [];
             };
@@ -260,6 +259,28 @@ class App extends React.Component<{}, State> {
       });
   }
 
+  handleDeleteWeek = (week: Week): void => {
+    WeekModel.delete(week)
+      .then(response => {
+        if (this.isWeekError(response)) {
+          this.setState({
+            updateMessage: response.message,
+          });
+        } else {
+          if (this.state.user) {
+            let user = {...this.state.user};
+            if (!user.weeks) {
+              user.weeks = [];
+            };
+            user.weeks = user.weeks.filter(week => week._id !== response._id);
+            this.setState({
+              user: user,
+            })
+          }
+        }
+      })
+  }
+
   fetchUserData = (username: User['username']): void => {
     UserModel.show(username)
       .then(response => {
@@ -310,7 +331,8 @@ class App extends React.Component<{}, State> {
               handleUpdateList={this.handleUpdateList}
               handleDeleteList={this.handleDeleteList}
               handleCreateWeek={this.handleCreateWeek}
-              handleUpdateWeek={this.handleUpdateWeek} />
+              handleUpdateWeek={this.handleUpdateWeek}
+              handleDeleteWeek={this.handleDeleteWeek} />
           </Router>
         </div>
         <Footer />

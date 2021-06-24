@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import List from '../models/List.interface';
 import ListShow from '../components/listComponents/ListShow';
@@ -31,6 +31,11 @@ const ListContainer = (props: Props): JSX.Element => {
         });
         listTitles = props.lists.map(list => <option className="list-label" key={list._id} value={list._id}>{list.name}</option>)
     }
+
+    useEffect(() => {
+        setSelectedList(props.lists ? props.lists[0] : null)
+    },[props.lists])
+
     return (
         <section className="dash-section lists">
             <div className="list-titles">

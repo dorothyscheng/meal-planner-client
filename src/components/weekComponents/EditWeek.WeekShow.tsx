@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 
 import Week from '../../models/Week.interface';
 import RecipeCard from '../recipeComponents/RecipeCard';
@@ -13,11 +13,6 @@ interface Props {
 
 const EditWeekWeekShow = (props: Props): JSX.Element => {
     const [redirect, setRedirect] = useState(false);
-    // const [weekName, setWeekName] = useState<any>(props.week?.name);
-
-    // useEffect(() => {
-    //     setWeekName(props.week?.name);
-    // }, [props.week])
 
     if (redirect) return <Redirect to='/dashboard' />
     if (!props.week) return <h3>Loading...</h3>;
@@ -33,8 +28,6 @@ const EditWeekWeekShow = (props: Props): JSX.Element => {
             let weekName = props.week.name;
             if (weekNameInput && weekNameInput.value) {
                 weekName = weekNameInput.value;
-                // console.log(weekNameInput.value);
-                // setWeekName(weekNameInput.value);
             }
             props.handleUpdateWeek({
                 ...props.week,
