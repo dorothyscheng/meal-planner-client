@@ -14,6 +14,7 @@ interface Params {
 
 interface Props extends RouteComponentProps<Params> {
     user: User | null,
+    handleUpdateWeek: (week: Week) => void,
 }
 
 interface State {
@@ -130,7 +131,8 @@ class EditWeek extends React.Component<Props, State> {
                     week={this.state.week}
                     recipeEquipped={ Boolean(this.state.selectedRecipe) }
                     handleMealSelectOrRemove={this.handleMealSelectOrRemove}
-                    origin='editWeek' />
+                    origin={'editWeek'}
+                    handleUpdateWeek={this.props.handleUpdateWeek} />
             </div>
         );
     }

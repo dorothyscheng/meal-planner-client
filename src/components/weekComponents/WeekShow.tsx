@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
 
 import Week from '../../models/Week.interface';
 import RecipeCard from '../recipeComponents/RecipeCard';
@@ -9,33 +9,55 @@ interface Props {
     recipeEquipped?: boolean,
     handleMealSelectOrRemove?: (e: React.MouseEvent) => void,
     origin?: string,
+    handleUpdateWeek?: (week: Week) => void,
 }
 
 const WeekShow = (props: Props): JSX.Element => {
+    const [redirect, setRedirect] = useState(false);
+    if (redirect) return <Redirect to='/dashboard' />
     if (!props.week) return <h3>Loading...</h3>;
+
     let tdClass = '';
     if (props.recipeEquipped) {
         tdClass = "available";
     };
+
     const editDeleteButtons = (
         <>
             <Link className="btn cancel-btn" to={`/dashboard/${props.week._id}/edit`}>Edit</Link>
             <p className="btn delete-btn">Delete</p>
         </>
     );
-    const saveButton = <p className="btn submit-btn">Save</p>;
+    const handleSubmit = (): void => {
+        if (props.week && props.handleUpdateWeek) {
+            const weekNameInput = document.getElementById('week-name') as HTMLInputElement;
+            let weekName = props.week.name;
+            if (weekNameInput && weekNameInput.value) {
+                weekName = weekNameInput.value;
+            }
+            props.handleUpdateWeek({
+                ...props.week,
+                name: weekName,
+            });
+            setRedirect(true);
+        };
+    };
+    
+    const saveButton = <p className="btn submit-btn" onClick={handleSubmit}>Save</p>;
     const weekNameInput = (
         <>
             <label htmlFor="week-name">Week Name: </label>
-            <input type="text" name="week-name" placeholder={props.week.name} />
+            <input id="week-name" type="text" name="week-name" placeholder={props.week.name} />
         </>
     )
+
+
     return (
         <div className="week-show-container">
             <div className="week-show-title">
-                <h2>{props.origin ? weekNameInput: props.week.name }</h2>
+                <h2>{props.handleUpdateWeek ? weekNameInput: props.week.name }</h2>
                 <div className="actions">
-                    { props.origin ? saveButton : editDeleteButtons }
+                    { props.handleUpdateWeek ? saveButton : editDeleteButtons }
                 </div>
             </div>
             <table className="week-show-table">

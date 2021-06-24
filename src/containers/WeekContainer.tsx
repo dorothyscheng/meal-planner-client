@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Week from '../models/Week.interface';
 import WeekShow from '../components/weekComponents/WeekShow';
 
@@ -7,7 +7,7 @@ interface Props {
 }
 
 const WeekContainer = (props: Props): JSX.Element => {
-    const [selectedWeek, setSelectedWeek] = useState(props.weeks? props.weeks[0] : null);
+    const [selectedWeek, setSelectedWeek] = useState(props.weeks ? props.weeks[0] : null);
 
     const handleWeekClick = (e: React.ChangeEvent<HTMLSelectElement>): void => {
         const weekId = e.target.value;
