@@ -480,3 +480,9 @@ th {
 .available:hover {
   border: 3px solid #bc4749;
 }
+td {
+  border: 3px solid transparent;
+}
+td .recipe-card-link {
+  width: 90%;
+}

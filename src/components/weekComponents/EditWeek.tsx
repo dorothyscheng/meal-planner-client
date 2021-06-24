@@ -52,7 +52,7 @@ class EditWeek extends React.Component<Props, State> {
         };
     }
 
-    handleRecipeSelect = (e: React.MouseEvent<HTMLElement>): void => {
+    handleRecipeSelect = (e: React.MouseEvent): void => {
         const target = e.target as Element;
         const recipeName = target.textContent;
         if (this.state.selectedRecipe && this.state.selectedRecipe.recipe.label === target.textContent) {
@@ -68,6 +68,20 @@ class EditWeek extends React.Component<Props, State> {
                 })
             };
         }
+    }
+
+    handleMealSelect = (e: React.MouseEvent): void => {
+        if (this.state.selectedRecipe) {
+            const target = e.target as Element;
+            const meal = target.getAttribute('id') as 'mondayB' | 'tuesdayB' | 'wednesdayB' | 'thursdayB' | 'fridayB' | 'saturdayB' | 'sundayB' | 'mondayL' | 'tuesdayL' | 'wednesdayL' | 'thursdayL' | 'fridayL' | 'saturdayL' | 'sundayL' | 'mondayD' | 'tuesdayD' | 'wednesdayD' | 'thursdayD' | 'fridayD' | 'saturdayD' | 'sundayD';
+            if (this.state.week) {
+                let week = this.state.week;
+                week[meal] = this.state.selectedRecipe;
+                this.setState({
+                    week: week,
+                });
+            };
+        };
     }
 
     render(): JSX.Element {
@@ -100,7 +114,8 @@ class EditWeek extends React.Component<Props, State> {
                 </div>
                 <WeekShow 
                     week={this.state.week}
-                    recipeEquipped={ Boolean(this.state.selectedRecipe) } />
+                    recipeEquipped={ Boolean(this.state.selectedRecipe) }
+                    handleMealSelect={this.handleMealSelect} />
             </div>
         );
     }

@@ -5,7 +5,7 @@ import { RecipeLong } from '../../models/Recipe.interface';
 
 interface Props {
     list: List | null,
-    handleRecipeSelect: (e: React.MouseEvent<HTMLElement>) => void,
+    handleRecipeSelect: (e: React.MouseEvent) => void,
     selectedRecipe: RecipeLong | null,
 }
 
