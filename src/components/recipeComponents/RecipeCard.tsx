@@ -9,6 +9,8 @@ interface Props {
     recipe: RecipeLong,
     showListListModal?: (recipe: RecipeLong) => void,
     removeRecipeFromList?: (recipe: RecipeLong) => void,
+    handleRecipeSelect?: (e: React.MouseEvent<HTMLElement>) => void,
+    selected?: boolean,
 }
 
 const RecipeCard = (props: Props): JSX.Element => {
@@ -33,8 +35,12 @@ const RecipeCard = (props: Props): JSX.Element => {
         recipeId = recipeIdArr[1];
     };
     if (redirect) return <Redirect to={`/recipes/${recipeId}`} />
+    let recipeCardLinkClass = 'recipe-card-link';
+    if (props.selected) {
+        recipeCardLinkClass += ' selected';
+    }
     return (
-        <div className="recipe-card-link" onClick={redirectLink}>
+        <div className={recipeCardLinkClass} onClick={props.handleRecipeSelect ? props.handleRecipeSelect : redirectLink}>
             <div className="card recipe-card" style={style}>
                 <h3 className="recipe-title">{props.recipe.recipe.label}</h3>
                 { props.removeRecipeFromList && <i className="fas fa-trash-alt" onClick={() => {if (props.removeRecipeFromList) {props.removeRecipeFromList(props.recipe)}}}></i> }

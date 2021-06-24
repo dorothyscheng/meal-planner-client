@@ -282,6 +282,10 @@ footer {
   cursor: pointer;
   transition: all .3s;
   flex: 0 0 auto;
+  border: 2px solid transparent;
+}
+.selected {
+  border: 3px solid #bc4749;
 }
 .recipe-card {
   display: flex;
@@ -472,4 +476,7 @@ th {
 }
 .list-holder label {
   margin-right: 10px;
+}
+.available:hover {
+  border: 3px solid #bc4749;
 }

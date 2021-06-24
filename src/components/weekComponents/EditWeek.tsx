@@ -6,6 +6,7 @@ import Week from '../../models/Week.interface';
 import List from '../../models/List.interface';
 import EditWeekListShow from './EditWeek.ListShow';
 import WeekShow from './WeekShow';
+import { RecipeLong } from '../../models/Recipe.interface';
 
 interface Params {
     weekId: string,
@@ -18,12 +19,14 @@ interface Props extends RouteComponentProps<Params> {
 interface State {
     week: Week | null,
     selectedList: List | null,
+    selectedRecipe: RecipeLong | null,
 }
 
 class EditWeek extends React.Component<Props, State> {
     state: State = {
         week: null,
         selectedList: null,
+        selectedRecipe: null,
     }
 
     handleListSelect = (e: React.ChangeEvent<HTMLSelectElement>): void => {
@@ -47,6 +50,24 @@ class EditWeek extends React.Component<Props, State> {
                 });
             };
         };
+    }
+
+    handleRecipeSelect = (e: React.MouseEvent<HTMLElement>): void => {
+        const target = e.target as Element;
+        const recipeName = target.textContent;
+        if (this.state.selectedRecipe && this.state.selectedRecipe.recipe.label === target.textContent) {
+            this.setState({
+                selectedRecipe: null,
+            });
+        } else {
+            let selectedRecipe;
+            if (this.state.selectedList) {
+                selectedRecipe = this.state.selectedList.recipes.filter(recipe => recipe.recipe.label === recipeName)[0];
+                this.setState({
+                    selectedRecipe: selectedRecipe,
+                })
+            };
+        }
     }
 
     render(): JSX.Element {
@@ -74,10 +95,12 @@ class EditWeek extends React.Component<Props, State> {
                         <select name="list-name" id="list-name" className="list-names" onChange={this.handleListSelect}>
                             { lists }
                         </select>
-                        <EditWeekListShow list={this.state.selectedList} />
+                        <EditWeekListShow list={this.state.selectedList} handleRecipeSelect={this.handleRecipeSelect} selectedRecipe={this.state.selectedRecipe ? this.state.selectedRecipe : null} />
                     </div>
                 </div>
-                <WeekShow week={this.state.week} />
+                <WeekShow 
+                    week={this.state.week}
+                    recipeEquipped={ Boolean(this.state.selectedRecipe) } />
             </div>
         );
     }
