@@ -5,7 +5,7 @@ import User from '../../models/User.interface';
 import Week from '../../models/Week.interface';
 import List from '../../models/List.interface';
 import EditWeekListShow from './EditWeek.ListShow';
-import WeekShow from './WeekShow';
+import EditWeekWeekShow from './EditWeek.WeekShow';
 import { RecipeLong } from '../../models/Recipe.interface';
 
 interface Params {
@@ -127,11 +127,10 @@ class EditWeek extends React.Component<Props, State> {
                         <EditWeekListShow list={this.state.selectedList} handleRecipeSelect={this.handleRecipeSelect} selectedRecipe={this.state.selectedRecipe ? this.state.selectedRecipe : null} />
                     </div>
                 </div>
-                <WeekShow 
+                <EditWeekWeekShow 
                     week={this.state.week}
                     recipeEquipped={ Boolean(this.state.selectedRecipe) }
                     handleMealSelectOrRemove={this.handleMealSelectOrRemove}
-                    origin={'editWeek'}
                     handleUpdateWeek={this.props.handleUpdateWeek} />
             </div>
         );

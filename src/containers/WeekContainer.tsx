@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Week from '../models/Week.interface';
 import WeekShow from '../components/weekComponents/WeekShow';
+import { useEffect } from 'react';
 
 interface Props {
     weeks: Week[] | null,
@@ -32,12 +33,19 @@ const WeekContainer = (props: Props): JSX.Element => {
         });
     }
     
+    let weekShow = <WeekShow week={selectedWeek} />
+
+    useEffect(() => {
+        setSelectedWeek(props.weeks ? props.weeks[0] : null)
+    },[props.weeks])
+
     return (
         <section className="dash-section">
             <div className="week-titles">
                 {props.weeks ? <><label htmlFor="week">Select a week to view: </label><select name="week" onChange={handleWeekClick}>{ weekTitles }</select></> : <h3>Loading...</h3>}
             </div>
-            <WeekShow week={selectedWeek} />
+            {/* <WeekShow week={selectedWeek} /> */}
+            { weekShow }
         </section>
     );
 }
