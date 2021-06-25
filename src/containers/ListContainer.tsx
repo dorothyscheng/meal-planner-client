@@ -13,8 +13,9 @@ interface Props {
 const ListContainer = (props: Props): JSX.Element => {
     const [selectedList, setSelectedList] = useState(props.lists ? props.lists[0] : null);
 
-    const handleListClick = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-        const listId = e.target.value;
+    const handleListClick = (e: React.MouseEvent): void => {
+        const target = e.target as Element;
+        const listId = target.getAttribute('id');
         if (props.lists) {
             setSelectedList(props.lists.filter(list => list._id === listId)[0]);
         }
@@ -29,7 +30,11 @@ const ListContainer = (props: Props): JSX.Element => {
                 return 0;
             }
         });
-        listTitles = props.lists.map(list => <option className="list-label" key={list._id} value={list._id}>{list.name}</option>)
+        listTitles = props.lists.map(list => <h3 
+            className="list-label" 
+            key={list._id}
+            id={list._id}
+            onClick={handleListClick}>{list.name}</h3>)
     }
 
     useEffect(() => {
@@ -37,12 +42,12 @@ const ListContainer = (props: Props): JSX.Element => {
     },[props.lists])
 
     return (
-        <section className="dash-section lists">
+        <section className="dash-section">
             <div className="list-titles">
-                {props.lists ? <><label htmlFor="list">Select a list to view: </label><select name="list" onChange={handleListClick}>{ listTitles }</select></> : <h3>Loading...</h3>}
+                {props.lists ? listTitles : <h3>Loading...</h3>}
             </div>
             { selectedList && <ListShow 
-                list={selectedList} 
+                list={ selectedList } 
                 handleUpdateList={props.handleUpdateList}
                 handleDeleteList={props.handleDeleteList} /> }
         </section>

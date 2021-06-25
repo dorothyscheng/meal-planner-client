@@ -44,7 +44,6 @@ const WeekContainer = (props: Props): JSX.Element => {
             <div className="week-titles">
                 {props.weeks ? <><label htmlFor="week">Select a week to view: </label><select name="week" onChange={handleWeekClick}>{ weekTitles }</select></> : <h3>Loading...</h3>}
             </div>
-            {/* <WeekShow week={selectedWeek} /> */}
             { weekShow }
         </section>
     );

@@ -54,7 +54,6 @@ class ListShow extends React.Component<Props, State> {
     }
 
     render(): JSX.Element {
-        // console.log(this.props);
         const recipeCards = this.props.list.recipes.map(recipe => <RecipeCard 
             key={recipe._links.self.href} 
             recipe={recipe}
@@ -62,19 +61,21 @@ class ListShow extends React.Component<Props, State> {
         return (
             <div className="list-show">
                 <div className="list-show-title">
-                    <h3>{this.props.list.name}</h3>
-                    <EditList 
-                        display={this.state.showEditList} 
-                        hideEditList={this.hideEditList} 
-                        list={this.props.list}
-                        handleUpdateList={this.props.handleUpdateList} />
+                    <div className="list-show-title-name">
+                        <h3>{this.props.list.name}</h3>
+                        <EditList 
+                            display={this.state.showEditList} 
+                            hideEditList={this.hideEditList} 
+                            list={this.props.list}
+                            handleUpdateList={this.props.handleUpdateList} />
+                    </div>
+                    <div className="actions">
+                        <p className="btn cancel-btn" onClick={this.showEditList}>Edit</p>
+                        <p className="btn delete-btn" onClick={this.handleDelete}>Delete</p>
+                    </div>
                 </div>
                 <div className="list-show-recipes">
                     { recipeCards.length !== 0 && recipeCards }
-                </div>
-                <div className="actions">
-                    <p className="btn cancel-btn" onClick={this.showEditList}>Edit</p>
-                    <p className="btn delete-btn" onClick={this.handleDelete}>Delete</p>
                 </div>
             </div>
         );
