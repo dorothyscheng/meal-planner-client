@@ -52,7 +52,10 @@ const Routes = (props: Props): JSX.Element => {
     return (
       <Switch>
         <Route exact path='/' component={ Home } />
-        <Route exact path='/recipes/:id' component={ RecipeShow } />
+        <Route exact path='/recipes/:id' render={(props) => <RecipeShow 
+          {...props} 
+          lists={user && user.lists ? user.lists : null}
+          handleUpdateList={handleUpdateList} />} />
         <Route path='/recipes' render={(props) => <RecipeContainer 
           {...props} 
           lists={user && user.lists ? user.lists : null}

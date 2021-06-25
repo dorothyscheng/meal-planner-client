@@ -35,6 +35,15 @@ const RecipeCard = (props: Props): JSX.Element => {
     } else {
         recipeId = recipeIdArr[1];
     };
+    
+    // The recipe API writes the recipe ID twice in the self-link when looking up a recipe by ID (which happens on recipe show pages). This logic checks for a double ID and captures the actual ID. It's needed for recipes that are added to lists from recipe show pages versus from the recipe index
+    if (recipeId.includes('/')) {
+        const regexp2 = /\/(.*)/
+        const secondIdArr = recipeId.match(regexp2);
+        if (secondIdArr) {
+            recipeId = secondIdArr[1];
+        }
+    }
 
     if (redirect) return <Redirect to={`/recipes/${recipeId}`} />
 

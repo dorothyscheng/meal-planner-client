@@ -116,8 +116,12 @@ label {
   margin-left: 20px;
   width: 50%;
 }
+.recipe-show-content .actions {
+  justify-content: flex-start;
+}
 .ingredient-list {
   font-size: 18px;
+  margin-top: 20px;
 }
 .fa-utensil-spoon {
   margin-right: 10px;
