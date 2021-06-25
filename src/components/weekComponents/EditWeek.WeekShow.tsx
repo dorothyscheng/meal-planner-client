@@ -13,6 +13,7 @@ interface Props {
 
 const EditWeekWeekShow = (props: Props): JSX.Element => {
     const [redirect, setRedirect] = useState(false);
+    const [newName, setNewName] = useState('');
 
     if (redirect) return <Redirect to='/dashboard' />
     if (!props.week) return <h3>Loading...</h3>;
@@ -22,12 +23,15 @@ const EditWeekWeekShow = (props: Props): JSX.Element => {
         tdClass = "available";
     };
 
+    const handleNewNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setNewName(e.target.value);
+    }
+
     const handleSubmit = (): void => {
         if (props.week) {
-            const weekNameInput = document.getElementById('week-name') as HTMLInputElement;
             let weekName = props.week.name;
-            if (weekNameInput && weekNameInput.value) {
-                weekName = weekNameInput.value;
+            if (weekNameInput && newName.length>0) {
+                weekName = newName;
             }
             props.handleUpdateWeek({
                 ...props.week,
@@ -46,7 +50,7 @@ const EditWeekWeekShow = (props: Props): JSX.Element => {
     const weekNameInput = (
         <>
             <label htmlFor="week-name">Week Name: </label>
-            <input id="week-name" type="text" name="week-name" placeholder={props.week.name} />
+            <input id="week-name" type="text" name="week-name" placeholder={props.week.name} onChange={handleNewNameChange} />
         </>
     )
 

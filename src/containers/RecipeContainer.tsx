@@ -11,42 +11,6 @@ interface QueryProperties {
     [key: string]: boolean,
 }
 
-// interface HealthProperties {
-//     'alcohol-free': boolean,
-//     'dairy-free': boolean,
-//     'egg-free': boolean,
-//     'fish-free': boolean,
-//     'gluten-free': boolean,
-//     'keto-friendly': boolean,
-//     'paleo': boolean,
-//     'vegan': boolean,
-//     'vegetarian': boolean,
-// }
-
-// interface MealProperties {
-//     breakfast: boolean,
-//     lunch: boolean,
-//     dinner: boolean,
-// }
-
-// interface DishTypeProperties {
-//     desserts: boolean,
-//     drinks: boolean,
-//     mainCourse: boolean,
-// }
-
-// interface CuisineTypeProperties {
-//     american: boolean,
-//     asian: boolean,
-//     caribbean: boolean,
-//     chinese: boolean,
-//     french: boolean,
-//     japanese: boolean,
-//     mexican: boolean,
-//     southAmerican: boolean,
-//     southEastAsian: boolean, 
-// }
-
 interface Props extends RouteComponentProps {
     lists: List[] | null,
     handleUpdateList: (list: List) => void,
@@ -121,13 +85,23 @@ class RecipeContainer extends React.Component<Props, State> {
     fetchRecipeQuery = (query: string): void => {
         RecipeModel.querySearch(query)
             .then(response => {
-                this.setState({
-                    recipes: response.hits,
-                    next: response._links.next.href,
-                    from: response.from,
-                    to: response.to,
-                    total: response.count,
-                });
+                console.log(response);
+                if (response.count <=20) {
+                    this.setState({
+                        recipes: response.hits,
+                        total: response.count,
+                        from: response.from,
+                        to: response.to,
+                    })
+                } else {
+                    this.setState({
+                        recipes: response.hits,
+                        next: response._links.next.href,
+                        from: response.from,
+                        to: response.to,
+                        total: response.count,
+                    });
+                }
             });
     }
 
@@ -345,6 +319,8 @@ class RecipeContainer extends React.Component<Props, State> {
             recipe={recipe} 
             showListListModal={this.showListListModal} />)
         return (
+            <>
+                { recipeSearch }
             <div className="recipe-container">
                 <h1>Showing recipes {this.state.from} to {this.state.to} of {this.state.total}</h1>
                 <p onClick={() => this.fetchRecipeNext(this.state.next)}>Next page</p>
@@ -358,6 +334,7 @@ class RecipeContainer extends React.Component<Props, State> {
                     lists={this.props.lists}
                     handleUpdateList={this.props.handleUpdateList} />
             </div>
+            </>
         );
     }
 };
