@@ -10,8 +10,13 @@ interface Props {
 const WeekContainer = (props: Props): JSX.Element => {
     const [selectedWeek, setSelectedWeek] = useState<Week | null>(props.weeks ? props.weeks[0] : null);
 
-    const handleWeekClick = (e: React.ChangeEvent<HTMLSelectElement>): void => {
-        const weekId = e.target.value;
+    useEffect(() => {
+        setSelectedWeek(props.weeks ? props.weeks[0] : null)
+    },[props.weeks])
+
+    const handleWeekClick = (e: React.MouseEvent): void => {
+        const target = e.target as Element;
+        const weekId = target.getAttribute('id');
         if (props.weeks) {
             setSelectedWeek(props.weeks.filter(week => week._id === weekId)[0]);
         }
@@ -28,21 +33,17 @@ const WeekContainer = (props: Props): JSX.Element => {
         });
         weekTitles = props.weeks.map(week => {
             return (
-                <option className="list-label" key={week._id} value={week._id}>{week.name}</option>
+                <h3 className="list-label" key={week._id} id={week._id} onClick={handleWeekClick}>{week.name}</h3>
             );
         });
     }
     
     let weekShow = <WeekShow week={selectedWeek} />
 
-    useEffect(() => {
-        setSelectedWeek(props.weeks ? props.weeks[0] : null)
-    },[props.weeks])
-
     return (
         <section className="dash-section">
-            <div className="week-titles">
-                {props.weeks ? <><label htmlFor="week">Select a week to view: </label><select name="week" onChange={handleWeekClick}>{ weekTitles }</select></> : <h3>Loading...</h3>}
+            <div className="list-titles week-titles">
+                {props.weeks ? weekTitles : <h3>Loading...</h3>}
             </div>
             { weekShow }
         </section>

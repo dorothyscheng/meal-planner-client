@@ -377,6 +377,7 @@ footer {
   align-items: space-between;
   width: 80%;
   height: 50vh;
+  border-radius: 2px;
 }
 .list-show-title {
   display: flex;
@@ -419,10 +420,14 @@ footer {
 }
 /* WEEK SHOW */
 .week-show-container {
-  width: 90%;
+  width: 80%;
+  height: 825px;
   padding: 5px;
   background-color: rgba(167, 201, 87, .3);
   border-radius: 2px;
+}
+.week-titles {
+  height: 825px;
 }
 .week-show-title {
   display: flex;
@@ -435,8 +440,8 @@ footer {
 }
 td {
   text-align: center;
-  height: 100px;
-  width: 100px;
+  height: 230px;
+  width: 187px;
 }
 th {
   font-size: 20px;
@@ -462,6 +467,7 @@ th {
   margin: 0 auto;
   display: flex;
   margin-top: 20px;
+  align-items: flex-start;
 }
 .week-edit-list-container {
   display: flex;

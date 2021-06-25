@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 import Week from '../../models/Week.interface';
 import RecipeCard from '../recipeComponents/RecipeCard';
@@ -37,7 +37,12 @@ const EditWeekWeekShow = (props: Props): JSX.Element => {
         };
     };
 
-    const saveButton = <p className="btn submit-btn" onClick={handleSubmit}>Save</p>;
+    const saveButton = (
+        <>
+            <Link to="/dashboard" className="btn cancel-btn">Cancel</Link>
+            <p className="btn submit-btn" onClick={handleSubmit}>Save</p>
+        </>
+    );
     const weekNameInput = (
         <>
             <label htmlFor="week-name">Week Name: </label>

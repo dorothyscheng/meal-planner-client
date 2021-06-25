@@ -54,8 +54,8 @@ class ListShow extends React.Component<Props, State> {
     }
 
     render(): JSX.Element {
-        const recipeCards = this.props.list.recipes.map(recipe => <RecipeCard 
-            key={recipe._links.self.href} 
+        const recipeCards = this.props.list.recipes.map((recipe, index) => <RecipeCard 
+            key={`${recipe._links.self.href}-${index}`} 
             recipe={recipe}
             removeRecipeFromList={this.removeRecipeFromList} />)
         return (

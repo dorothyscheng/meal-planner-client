@@ -10,11 +10,12 @@ interface Props {
 
 const WeekShow = (props: Props): JSX.Element => {
     const [weekName, setWeekName] = useState<any>(props.week?.name);
+
     useEffect(() => {
         setWeekName(props.week?.name);
-    }, [props.week])
-    if (!props.week) return <h3>Loading...</h3>;
+    }, [props.week]);
 
+    if (!props.week) return <h3>Loading...</h3>;
 
     const editDeleteButtons = (
         <>
