@@ -6,14 +6,19 @@ import { useEffect } from 'react';
 interface Props {
     weeks: Week[] | null,
     handleDeleteWeek: (week: Week) => void,
+    updatedWeek: Week | null,
 }
 
 const WeekContainer = (props: Props): JSX.Element => {
     const [selectedWeek, setSelectedWeek] = useState<Week | null>(props.weeks ? props.weeks[0] : null);
 
     useEffect(() => {
-        setSelectedWeek(props.weeks ? props.weeks[0] : null)
-    },[props.weeks])
+        if (props.updatedWeek) {
+            setSelectedWeek(props.updatedWeek);
+        } else {
+            setSelectedWeek(props.weeks ? props.weeks[0] : null)
+        };
+    },[props.weeks, props.updatedWeek]);
 
     const handleWeekClick = (e: React.MouseEvent): void => {
         const target = e.target as Element;
@@ -33,8 +38,12 @@ const WeekContainer = (props: Props): JSX.Element => {
             }
         });
         weekTitles = props.weeks.map(week => {
+            let className='list-label';
+            if (week._id === selectedWeek?._id) {
+                className += ' show';
+            };
             return (
-                <h3 className="list-label" key={week._id} id={week._id} onClick={handleWeekClick}>{week.name}</h3>
+                <h3 className={className} key={week._id} id={week._id} onClick={handleWeekClick}>{week.name}</h3>
             );
         });
     }

@@ -23,6 +23,8 @@ interface Props {
     handleDeleteList: (list: List) => void,
     handleCreateWeek: (week: Week) => void,
     handleDeleteWeek: (week: Week) => void,
+    updatedWeek: Week | null,
+    updatedList: List | null,
 }
 
 interface State {
@@ -146,7 +148,8 @@ class UserDashboard extends React.Component<Props, State> {
                     lists={this.props.user.lists ? this.props.user.lists : null}
                     handleUpdateList={this.props.handleUpdateList}
                     handleDeleteList={this.props.handleDeleteList}
-                    username={this.props.user.username} />
+                    username={this.props.user.username}
+                    updatedList={this.props.updatedList} />
                 <div className="dashboard-section-title">
                     <h2 className="dashboard-title">My Weeks</h2>
                     <div className="actions">
@@ -160,7 +163,8 @@ class UserDashboard extends React.Component<Props, State> {
                 username={this.props.user.username} />
                 <WeekContainer
                     weeks={this.props.user.weeks ? this.props.user.weeks : null}
-                    handleDeleteWeek={this.props.handleDeleteWeek} />
+                    handleDeleteWeek={this.props.handleDeleteWeek}
+                    updatedWeek={this.props.updatedWeek} />
             </div>
         );
     }

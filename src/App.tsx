@@ -23,6 +23,8 @@ interface State {
    displaySignupModal: boolean,
    loginSignupError: string | null,
    updateMessage: string | null,
+   updatedWeek: Week | null,
+   updatedList: List | null,
 }
 
 class App extends React.Component<{}, State> {
@@ -31,7 +33,9 @@ class App extends React.Component<{}, State> {
     displayLoginModal: false,
     displaySignupModal: false,
     loginSignupError: null,
-    updateMessage: null
+    updateMessage: null,
+    updatedWeek: null,
+    updatedList: null,
   }
 
   isError = (response: errorMessage | User): response is errorMessage => {
@@ -185,6 +189,7 @@ class App extends React.Component<{}, State> {
             user.lists = lists;
             this.setState({
               user: user,
+              updatedList: response,
             })
           }
         }
@@ -253,6 +258,7 @@ class App extends React.Component<{}, State> {
             user.weeks = weeks;
             this.setState({
               user: user,
+              updatedWeek: response,
             });
           };
         };
@@ -332,7 +338,9 @@ class App extends React.Component<{}, State> {
               handleDeleteList={this.handleDeleteList}
               handleCreateWeek={this.handleCreateWeek}
               handleUpdateWeek={this.handleUpdateWeek}
-              handleDeleteWeek={this.handleDeleteWeek} />
+              handleDeleteWeek={this.handleDeleteWeek}
+              updatedWeek={this.state.updatedWeek}
+              updatedList={this.state.updatedList} />
           </Router>
         </div>
         <Footer />

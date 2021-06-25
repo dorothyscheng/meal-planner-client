@@ -52,7 +52,6 @@ label {
 /* MODAL */
 .modal-container {
   background-color: rgba(188,71,73,.7);
-  /* background-color: rgba(56, 102, 65, .7); */
   position: fixed;
   top: 0;
   left: 0;
@@ -63,7 +62,6 @@ label {
 }
 .modal-content {
   background-color: #fff;
-  /* border: 3px solid #bc4749; */
   margin: 5% auto;
   padding: 20px;
   width: 50%;
@@ -95,9 +93,6 @@ label {
 .btn:hover {
   color: #fff;
 }
-/* .submit-btn {
-  margin-left: 10px;
-} */
 .cancel-btn {
   margin-right: 10px;
 }
@@ -368,6 +363,7 @@ footer {
   width: 20%;
   height: 50vh;
   overflow-y: scroll;
+  margin-right: 10px;
 }
 .list-show {
   background-color: rgba(167, 201, 87, .3);
@@ -418,6 +414,10 @@ footer {
 .list-edit-form label {
   margin: 0;
 }
+.show {
+  background-color: #a7c957;
+}
+
 /* WEEK SHOW */
 .week-show-container {
   width: 80%;
@@ -500,4 +500,30 @@ td {
 }
 td .recipe-card-link {
   width: 90%;
+}
+
+/* SCROLLBARS */
+.list-show-recipes::-webkit-scrollbar {
+  width: 10px;
+}
+.list-show-recipes::-webkit-scrollbar-track {
+  background: rgba(56, 102, 65, .5)
+}
+.list-show-recipes::-webkit-scrollbar-thumb {
+  background: #a7c957;
+}
+.list-show-recipes::-webkit-scrollbar-thumb:hover {
+  background: #6a994e;
+}
+.list-titles::-webkit-scrollbar {
+  width: 10px;
+}
+.list-titles::-webkit-scrollbar-track {
+  background: rgba(56, 102, 65, .5);
+}
+.list-titles::-webkit-scrollbar-thumb {
+  background: #a7c957;
+}
+.list-titles::-webkit-scrollbar-thumb:hover {
+  background: #6a994e;
 }

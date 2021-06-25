@@ -8,10 +8,19 @@ interface Props {
     handleUpdateList: (list: List) => void,
     handleDeleteList: (list: List) => void,
     username: string,
+    updatedList: List| null,
 }
 
 const ListContainer = (props: Props): JSX.Element => {
     const [selectedList, setSelectedList] = useState(props.lists ? props.lists[0] : null);
+
+    useEffect(() => {
+        if (props.updatedList) {
+            setSelectedList(props.updatedList);
+        } else {
+            setSelectedList(props.lists ? props.lists[0] : null)
+        }
+    },[props.lists, props.updatedList])
 
     const handleListClick = (e: React.MouseEvent): void => {
         const target = e.target as Element;
@@ -30,16 +39,20 @@ const ListContainer = (props: Props): JSX.Element => {
                 return 0;
             }
         });
-        listTitles = props.lists.map(list => <h3 
-            className="list-label" 
-            key={list._id}
-            id={list._id}
-            onClick={handleListClick}>{list.name}</h3>)
+        listTitles = props.lists.map(list => {
+            let className = 'list-label';
+            if (list._id === selectedList?._id) {
+                className += ' show';
+            }
+            return (
+                <h3 
+                    className={className} 
+                    key={list._id}
+                    id={list._id}
+                    onClick={handleListClick}>{list.name}</h3>
+            );
+        });
     }
-
-    useEffect(() => {
-        setSelectedList(props.lists ? props.lists[0] : null)
-    },[props.lists])
 
     return (
         <section className="dash-section">

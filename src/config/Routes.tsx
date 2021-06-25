@@ -22,6 +22,8 @@ interface Props {
   handleCreateWeek: (week: Week) => void,
   handleUpdateWeek: (week: Week) => void,
   handleDeleteWeek: (week: Week) => void,
+  updatedWeek: Week | null,
+  updatedList: List | null,
 }
 
 const Routes = (props: Props): JSX.Element => {
@@ -40,7 +42,9 @@ const Routes = (props: Props): JSX.Element => {
         handleUpdateList={props.handleUpdateList}
         handleDeleteList={props.handleDeleteList}
         handleCreateWeek={props.handleCreateWeek}
-        handleDeleteWeek={props.handleDeleteWeek}/>}/>
+        handleDeleteWeek={props.handleDeleteWeek}
+        updatedWeek={props.updatedWeek}
+        updatedList={props.updatedList}/>}/>
       <Route path='/dashboard/edit' render={() => <UserEdit user={user} handleUserEdit={props.handleUserEdit} />} />
       <Route path='/dashboard/:weekId/edit' render={(props) => <EditWeek {...props} user={user} handleUpdateWeek={handleUpdateWeek} />} />
     </Switch>
