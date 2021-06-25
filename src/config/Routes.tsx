@@ -28,24 +28,19 @@ const Routes = (props: Props): JSX.Element => {
   const auth = props.auth || localStorage.getItem('auth');
   const user = props.user;
   const updateMessage = props.updateMessage;
-  // const handleUserEdit = props.handleUserEdit;
-  // const handleUserDelete = props.handleUserDelete;
-  // const handleCreateList = props.handleCreateList;
   const handleUpdateList = props.handleUpdateList;
-  // const handleDeleteList = props.handleDeleteList;
-  // const handleCreateWeek = props.handleCreateWeek;
   const handleUpdateWeek = props.handleUpdateWeek;
   const protectedRoutes = (
     <Switch>
       <Route exact path='/dashboard' render={() => <UserDashboard 
-        // {...props} 
         user={user} 
         message={updateMessage} 
         handleUserDelete={props.handleUserDelete}
         handleCreateList={props.handleCreateList} 
         handleUpdateList={props.handleUpdateList}
         handleDeleteList={props.handleDeleteList}
-        handleCreateWeek={props.handleCreateWeek}/>}/>
+        handleCreateWeek={props.handleCreateWeek}
+        handleDeleteWeek={props.handleDeleteWeek}/>}/>
       <Route path='/dashboard/edit' render={() => <UserEdit user={user} handleUserEdit={props.handleUserEdit} />} />
       <Route path='/dashboard/:weekId/edit' render={(props) => <EditWeek {...props} user={user} handleUpdateWeek={handleUpdateWeek} />} />
     </Switch>

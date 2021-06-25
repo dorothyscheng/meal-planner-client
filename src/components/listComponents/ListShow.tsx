@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import List from '../../models/List.interface';
 import RecipeCard from '../recipeComponents/RecipeCard';
@@ -75,7 +76,7 @@ class ListShow extends React.Component<Props, State> {
                     </div>
                 </div>
                 <div className="list-show-recipes">
-                    { recipeCards.length !== 0 && recipeCards }
+                    { recipeCards.length !== 0 ? recipeCards : <Link to="/recipes" className="underline"><h3>Add some recipes to get started!</h3></Link> }
                 </div>
             </div>
         );

@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 interface Props {
     weeks: Week[] | null,
+    handleDeleteWeek: (week: Week) => void,
 }
 
 const WeekContainer = (props: Props): JSX.Element => {
@@ -38,7 +39,7 @@ const WeekContainer = (props: Props): JSX.Element => {
         });
     }
     
-    let weekShow = <WeekShow week={selectedWeek} />
+    let weekShow = <WeekShow week={selectedWeek} handleDeleteWeek={props.handleDeleteWeek} />
 
     return (
         <section className="dash-section">

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import List from '../../models/List.interface';
 import RecipeCard from '../recipeComponents/RecipeCard';
 import { RecipeLong } from '../../models/Recipe.interface';
@@ -11,7 +13,7 @@ interface Props {
 
 const EditWeekListShow = (props: Props): JSX.Element => {
     if (!props.list) return <h3>Loading...</h3>;
-    let recipes: JSX.Element | JSX.Element[] = <h3>No recipes found</h3>;
+    let recipes: JSX.Element | JSX.Element[] = <Link to="/recipes" className="underline"><h4>Add recipes to a list, then add them to your week.</h4></Link>;
     if (props.list.recipes.length > 0) {
         recipes = props.list.recipes.map((recipe, index) => {
             let selected = false;

@@ -6,6 +6,7 @@ import RecipeCard from '../recipeComponents/RecipeCard';
 
 interface Props {
     week: Week | null,
+    handleDeleteWeek: (week: Week) => void,
 }
 
 const WeekShow = (props: Props): JSX.Element => {
@@ -15,12 +16,18 @@ const WeekShow = (props: Props): JSX.Element => {
         setWeekName(props.week?.name);
     }, [props.week]);
 
-    if (!props.week) return <h3>Loading...</h3>;
+    if (!props.week) return <div className="week-show-container"><h3>Create a week, then add recipes from your lists.</h3></div>;
+
+    const handleDeleteClick = () => {
+        if (props.week) {
+            props.handleDeleteWeek(props.week);
+        }
+    }
 
     const editDeleteButtons = (
         <>
             <Link className="btn cancel-btn" to={`/dashboard/${props.week._id}/edit`}>Edit</Link>
-            <p className="btn delete-btn">Delete</p>
+            <p className="btn delete-btn" onClick={handleDeleteClick}>Delete</p>
         </>
     );
 
