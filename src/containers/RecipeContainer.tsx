@@ -14,6 +14,7 @@ interface QueryProperties {
 interface Props extends RouteComponentProps {
     lists: List[] | null,
     handleUpdateList: (list: List) => void,
+    querySearchProp?: string,
 }
 
 interface State {
@@ -321,19 +322,19 @@ class RecipeContainer extends React.Component<Props, State> {
         return (
             <>
                 { recipeSearch }
-            <div className="recipe-container">
-                <h1>Showing recipes {this.state.from} to {this.state.to} of {this.state.total}</h1>
-                <p onClick={() => this.fetchRecipeNext(this.state.next)}>Next page</p>
-                <div className="card-container recipe-container">
-                    { recipeCards }
+                <div className="recipe-container">
+                    <h1>Showing recipes {this.state.from} to {this.state.to} of {this.state.total}</h1>
+                    <p onClick={() => this.fetchRecipeNext(this.state.next)}>Next page</p>
+                    <div className="card-container recipe-container">
+                        { recipeCards }
+                    </div>
+                    <ListListModal 
+                        display={this.state.showListListModal} 
+                        hideListListModal={this.hideListListModal}
+                        recipe={this.state.selectedRecipe}
+                        lists={this.props.lists}
+                        handleUpdateList={this.props.handleUpdateList} />
                 </div>
-                <ListListModal 
-                    display={this.state.showListListModal} 
-                    hideListListModal={this.hideListListModal}
-                    recipe={this.state.selectedRecipe}
-                    lists={this.props.lists}
-                    handleUpdateList={this.props.handleUpdateList} />
-            </div>
             </>
         );
     }
