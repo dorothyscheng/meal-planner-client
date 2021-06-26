@@ -7,6 +7,10 @@ import RecipeModel from '../models/RecipeModel';
 import ListListModal from '../components/listComponents/ListListModal';
 import List from '../models/List.interface';
 
+interface Style {
+    display: 'none' | 'flex',
+}
+
 interface QueryProperties {
     [key: string]: boolean,
 }
@@ -36,6 +40,7 @@ interface State {
     dishTypeProperties: QueryProperties,
     cuisineTypeProperties: QueryProperties,
     querySearch: string,
+    displayRecipeFilters: boolean,
 }
 
 class RecipeContainer extends React.Component<Props, State> {
@@ -86,6 +91,7 @@ class RecipeContainer extends React.Component<Props, State> {
             'south east asian': false, 
         },
         querySearch: '',
+        displayRecipeFilters: true,
     }
 
     fetchRecipeQuery = (query: string): void => {
@@ -222,6 +228,18 @@ class RecipeContainer extends React.Component<Props, State> {
         });
     }
 
+    showRecipeFilters = (): void => {
+        this.setState({
+            displayRecipeFilters: true,
+        });
+    }
+
+    hideRecipeFilters = (): void => {
+        this.setState({
+            displayRecipeFilters: false,
+        })
+    }
+
     componentDidMount() {
         if (this.props.location.state && this.props.location.state.querySearch) {
             this.fetchRecipeQuery(this.props.location.state.querySearch);
@@ -249,91 +267,164 @@ class RecipeContainer extends React.Component<Props, State> {
     }
 
     render(): JSX.Element {
+        let style: Style = {
+            display: 'flex',
+        }
+        if (!this.state.displayRecipeFilters) {
+            style = {
+                display: 'none',
+            }
+        };
+
+        const hideButton = <p className="underline" onClick={this.hideRecipeFilters}>Hide</p>;
+        const showButton = <p className="underline" onClick={this.showRecipeFilters}>Show</p>;
+
         const recipeSearch = (
-            <div className="recipe-container">
-                <h3>What are you looking for?</h3>
-                <form onSubmit={this.handleRecipeSearch}>
+            <div className="search-container">
+                <div className="search-title">
+                    <h3>Recipe Filters</h3>
+                    { this.state.displayRecipeFilters ? hideButton : showButton }
+                </div>
+                <form className="search-form" onSubmit={this.handleRecipeSearch} style={style}>
 
-                    <label htmlFor="q">Search by name:</label>
-                    <input type="text" value={this.state.querySearch} onChange={this.handleQuerySearchChange}></input>
-
-                    <div>
-                        <h3>Overall Diet</h3>
-                        <input className="diet" type="checkbox" id="balanced" value="balanced" checked={this.state.dietProperties.balanced} onChange={this.handleDietChange}/>
-                        <label htmlFor="balanced">Balanced</label>
-                        <input className="diet" type="checkbox" id="high-protein" value="high-protein" checked={this.state.dietProperties['high-protein']} onChange={this.handleDietChange}/>
-                        <label htmlFor="High-Protein">High-Protein</label>
-                        <input className="diet" type="checkbox" id="low-carb" value="low-carb" checked={this.state.dietProperties['low-carb']} onChange={this.handleDietChange}/>
-                        <label htmlFor="Low-Carb">Low-Carb</label>
-                        <input className="diet" type="checkbox" id="low-fat" value="low-fat" checked={this.state.dietProperties['low-fat']} onChange={this.handleDietChange}/>
-                        <label htmlFor="Low-Fat">Low-Fat</label>
+                    <div className="search-div">
+                        <label htmlFor="q">Search by name:</label>
+                        <input type="text" value={this.state.querySearch} onChange={this.handleQuerySearchChange}></input>
                     </div>
 
-                    <div>
-                        <h3>Any dietary restrictions?</h3>
-                        <input className="health" type="checkbox" id="alcohol-free" value="alcohol-free" checked={this.state.healthProperties['alcohol-free']} onChange={this.handleHealthChange}/>
-                        <label htmlFor="Alcohol-Free">Alcohol-Free</label>
-                        <input className="health" type="checkbox" id="dairy-free" value="dairy-free" checked={this.state.healthProperties['dairy-free']} onChange={this.handleHealthChange}/>
-                        <label htmlFor="Dairy-Free">Dairy-Free</label>
-                        <input className="health" type="checkbox" id="egg-free" value="egg-free" checked={this.state.healthProperties['egg-free']} onChange={this.handleHealthChange}/>
-                        <label htmlFor="Egg-Free">Egg-Free</label>
-                        <input className="health" type="checkbox" id="fish-free" value="fish-free" checked={this.state.healthProperties['fish-free']} onChange={this.handleHealthChange}/>
-                        <label htmlFor="Fish-Free">Fish-Free</label>
-                        <input className="health" type="checkbox" id="gluten-free" value="gluten-free" checked={this.state.healthProperties['gluten-free']} onChange={this.handleHealthChange}/>
-                        <label htmlFor="Gluten-Free">Gluten-Free</label>
-                        <input className="health" type="checkbox" id="keto-friendly" value="keto-friendly" checked={this.state.healthProperties['keto-friendly']} onChange={this.handleHealthChange}/>
-                        <label htmlFor="Keto-Friendly">Keto-Friendly</label>
-                        <input className="health" type="checkbox" id="paleo" value="paleo" checked={this.state.healthProperties.paleo} onChange={this.handleHealthChange}/>
-                        <label htmlFor="Paleo">Paleo</label>
-                        <input className="health" type="checkbox" id="vegan" value="vegan" checked={this.state.healthProperties.vegan} onChange={this.handleHealthChange}/>
-                        <label htmlFor="Vegan">Vegan</label>
-                        <input className="health" type="checkbox" id="vegetarian" value="vegetarian" checked={this.state.healthProperties.vegetarian} onChange={this.handleHealthChange}/>
-                        <label htmlFor="Vegetarian">Vegetarian</label>
+                    <div className="search-div">
+                        <h4>Overall Diet</h4>
+                        <div className="search-term">
+                            <input className="diet" type="checkbox" id="balanced" value="balanced" checked={this.state.dietProperties.balanced} onChange={this.handleDietChange}/>
+                            <label htmlFor="balanced">Balanced</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="diet" type="checkbox" id="high-protein" value="high-protein" checked={this.state.dietProperties['high-protein']} onChange={this.handleDietChange}/>
+                            <label htmlFor="High-Protein">High-Protein</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="diet" type="checkbox" id="low-carb" value="low-carb" checked={this.state.dietProperties['low-carb']} onChange={this.handleDietChange}/>
+                            <label htmlFor="Low-Carb">Low-Carb</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="diet" type="checkbox" id="low-fat" value="low-fat" checked={this.state.dietProperties['low-fat']} onChange={this.handleDietChange}/>
+                            <label htmlFor="Low-Fat">Low-Fat</label>
+                        </div>
                     </div>
 
-                    <div>
-                        <h3>Meal</h3>
-                        <input className="mealType" type="checkbox" id="breakfast" value="breakfast" checked={this.state.mealProperties.breakfast} onChange={this.handleMealChange}/>
-                        <label htmlFor="Breakfast">Breakfast</label>
-                        <input className="mealType" type="checkbox" id="lunch" value="lunch" checked={this.state.mealProperties.lunch} onChange={this.handleMealChange}/>
-                        <label htmlFor="Lunch">Lunch</label>
-                        <input className="mealType" type="checkbox" id="dinner" value="dinner" checked={this.state.mealProperties.dinner} onChange={this.handleMealChange}/>
-                        <label htmlFor="Dinner">Dinner</label>
+                    <div className="search-div">
+                        <h4>Any dietary restrictions?</h4>
+                        <div className="search-term">
+                            <input className="health" type="checkbox" id="alcohol-free" value="alcohol-free" checked={this.state.healthProperties['alcohol-free']} onChange={this.handleHealthChange}/>
+                            <label htmlFor="Alcohol-Free">Alcohol-Free</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="health" type="checkbox" id="dairy-free" value="dairy-free" checked={this.state.healthProperties['dairy-free']} onChange={this.handleHealthChange}/>
+                            <label htmlFor="Dairy-Free">Dairy-Free</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="health" type="checkbox" id="egg-free" value="egg-free" checked={this.state.healthProperties['egg-free']} onChange={this.handleHealthChange}/>
+                            <label htmlFor="Egg-Free">Egg-Free</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="health" type="checkbox" id="fish-free" value="fish-free" checked={this.state.healthProperties['fish-free']} onChange={this.handleHealthChange}/>
+                            <label htmlFor="Fish-Free">Fish-Free</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="health" type="checkbox" id="gluten-free" value="gluten-free" checked={this.state.healthProperties['gluten-free']} onChange={this.handleHealthChange}/>
+                            <label htmlFor="Gluten-Free">Gluten-Free</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="health" type="checkbox" id="keto-friendly" value="keto-friendly" checked={this.state.healthProperties['keto-friendly']} onChange={this.handleHealthChange}/>
+                            <label htmlFor="Keto-Friendly">Keto-Friendly</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="health" type="checkbox" id="paleo" value="paleo" checked={this.state.healthProperties.paleo} onChange={this.handleHealthChange}/>
+                            <label htmlFor="Paleo">Paleo</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="health" type="checkbox" id="vegan" value="vegan" checked={this.state.healthProperties.vegan} onChange={this.handleHealthChange}/>
+                            <label htmlFor="Vegan">Vegan</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="health" type="checkbox" id="vegetarian" value="vegetarian" checked={this.state.healthProperties.vegetarian} onChange={this.handleHealthChange}/>
+                            <label htmlFor="Vegetarian">Vegetarian</label>
+                        </div>
                     </div>
 
-                    <div>
-                        <h3>Dish Type</h3>
-                        <input className="dishType" type="checkbox" id="desserts" value="desserts" checked={this.state.dishTypeProperties.desserts} onChange={this.handleDishTypeChange}/>
-                        <label htmlFor="Desserts">Desserts</label>
-                        <input className="dishType" type="checkbox" id="drinks" value="drinks" checked={this.state.dishTypeProperties.drinks} onChange={this.handleDishTypeChange}/>
-                        <label htmlFor="Drinks">Drinks</label>
-                        <input className="dishType" type="checkbox" id="main-course" value="main course" checked={this.state.dishTypeProperties['main course']} onChange={this.handleDishTypeChange}/>
-                        <label htmlFor="Main course">Main course</label>
+                    <div className="search-div">
+                        <h4>Meal</h4>
+                        <div className="search-term">
+                            <input className="mealType" type="checkbox" id="breakfast" value="breakfast" checked={this.state.mealProperties.breakfast} onChange={this.handleMealChange}/>
+                            <label htmlFor="Breakfast">Breakfast</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="mealType" type="checkbox" id="lunch" value="lunch" checked={this.state.mealProperties.lunch} onChange={this.handleMealChange}/>
+                            <label htmlFor="Lunch">Lunch</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="mealType" type="checkbox" id="dinner" value="dinner" checked={this.state.mealProperties.dinner} onChange={this.handleMealChange}/>
+                            <label htmlFor="Dinner">Dinner</label>
+                        </div>
                     </div>
 
-                    <div>
-                        <h3>Cuisine Type</h3>
-                        <input className="cuisineType" type="checkbox" id="american" value="american" checked={this.state.cuisineTypeProperties.american} onChange={this.handleCuisineTypeChange}/>
-                        <label htmlFor="American">American</label>
-                        <input className="cuisineType" type="checkbox" id="asian" value="asian" checked={this.state.cuisineTypeProperties.asian} onChange={this.handleCuisineTypeChange}/>
-                        <label htmlFor="Asian">Asian</label>
-                        <input className="cuisineType" type="checkbox" id="caribbean" value="caribbean" checked={this.state.cuisineTypeProperties.caribbean} onChange={this.handleCuisineTypeChange}/>
-                        <label htmlFor="Caribbean">Caribbean</label>
-                        <input className="cuisineType" type="checkbox" id="chinese" value="chinese" checked={this.state.cuisineTypeProperties.chinese} onChange={this.handleCuisineTypeChange}/>
-                        <label htmlFor="Chinese">Chinese</label>
-                        <input className="cuisineType" type="checkbox" id="french" value="french" checked={this.state.cuisineTypeProperties.french} onChange={this.handleCuisineTypeChange}/>
-                        <label htmlFor="French">French</label>
-                        <input className="cuisineType" type="checkbox" id="japanese" value="japanese" checked={this.state.cuisineTypeProperties.japanese} onChange={this.handleCuisineTypeChange}/>
-                        <label htmlFor="Japanese">Japanese</label>
-                        <input className="cuisineType" type="checkbox" id="mexican" value="mexican" checked={this.state.cuisineTypeProperties.mexican} onChange={this.handleCuisineTypeChange}/>
-                        <label htmlFor="Mexican">Mexican</label>
-                        <input className="cuisineType" type="checkbox" id="south-american" value="south american" checked={this.state.cuisineTypeProperties['south american']} onChange={this.handleCuisineTypeChange}/>
-                        <label htmlFor="South American">South American</label>
-                        <input className="cuisineType" type="checkbox" id="south-east-asian" value="south east asian" checked={this.state.cuisineTypeProperties['south east asian']} onChange={this.handleCuisineTypeChange}/>
-                        <label htmlFor="South East Asian">South East Asian</label>
+                    <div className="search-div">
+                        <h4>Dish Type</h4>
+                        <div className="search-term">
+                            <input className="dishType" type="checkbox" id="desserts" value="desserts" checked={this.state.dishTypeProperties.desserts} onChange={this.handleDishTypeChange}/>
+                            <label htmlFor="Desserts">Desserts</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="dishType" type="checkbox" id="drinks" value="drinks" checked={this.state.dishTypeProperties.drinks} onChange={this.handleDishTypeChange}/>
+                            <label htmlFor="Drinks">Drinks</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="dishType" type="checkbox" id="main-course" value="main course" checked={this.state.dishTypeProperties['main course']} onChange={this.handleDishTypeChange}/>
+                            <label htmlFor="Main course">Main course</label>
+                        </div>
                     </div>
 
-                    <button type="submit">Search</button>
+                    <div className="search-div">
+                        <h4>Cuisine Type</h4>
+                        <div className="search-term">
+                            <input className="cuisineType" type="checkbox" id="american" value="american" checked={this.state.cuisineTypeProperties.american} onChange={this.handleCuisineTypeChange}/>
+                            <label htmlFor="American">American</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="cuisineType" type="checkbox" id="asian" value="asian" checked={this.state.cuisineTypeProperties.asian} onChange={this.handleCuisineTypeChange}/>
+                            <label htmlFor="Asian">Asian</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="cuisineType" type="checkbox" id="caribbean" value="caribbean" checked={this.state.cuisineTypeProperties.caribbean} onChange={this.handleCuisineTypeChange}/>
+                            <label htmlFor="Caribbean">Caribbean</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="cuisineType" type="checkbox" id="chinese" value="chinese" checked={this.state.cuisineTypeProperties.chinese} onChange={this.handleCuisineTypeChange}/>
+                            <label htmlFor="Chinese">Chinese</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="cuisineType" type="checkbox" id="french" value="french" checked={this.state.cuisineTypeProperties.french} onChange={this.handleCuisineTypeChange}/>
+                            <label htmlFor="French">French</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="cuisineType" type="checkbox" id="japanese" value="japanese" checked={this.state.cuisineTypeProperties.japanese} onChange={this.handleCuisineTypeChange}/>
+                            <label htmlFor="Japanese">Japanese</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="cuisineType" type="checkbox" id="mexican" value="mexican" checked={this.state.cuisineTypeProperties.mexican} onChange={this.handleCuisineTypeChange}/>
+                            <label htmlFor="Mexican">Mexican</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="cuisineType" type="checkbox" id="south-american" value="south american" checked={this.state.cuisineTypeProperties['south american']} onChange={this.handleCuisineTypeChange}/>
+                            <label htmlFor="South American">South American</label>
+                        </div>
+                        <div className="search-term">
+                            <input className="cuisineType" type="checkbox" id="south-east-asian" value="south east asian" checked={this.state.cuisineTypeProperties['south east asian']} onChange={this.handleCuisineTypeChange}/>
+                            <label htmlFor="South East Asian">South East Asian</label>
+                        </div>
+                    </div>
+
+                    <button type="submit" className="submit-btn">Search</button>
                 </form>
             </div>
         )
@@ -347,8 +438,10 @@ class RecipeContainer extends React.Component<Props, State> {
             <>
                 { recipeSearch }
                 <div className="recipe-container">
-                    <h1>Showing recipes {this.state.from} to {this.state.to} of {this.state.total}</h1>
-                    <p onClick={() => this.fetchRecipeNext(this.state.next)}>Next page</p>
+                    <div className="search-title">
+                        <h3>Showing recipes {this.state.from} to {this.state.to} of {this.state.total}</h3>
+                        <p onClick={() => this.fetchRecipeNext(this.state.next)} className="underline">Next page</p>
+                    </div>
                     <div className="card-container recipe-container">
                         { recipeCards }
                     </div>

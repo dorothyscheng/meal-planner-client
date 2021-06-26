@@ -269,6 +269,32 @@ footer {
 .final-section {
   padding-bottom: 50px;
 }
+
+/* RECIPE SEARCH */
+.search-container {
+  margin: 10px auto 0 auto;
+  width: 90%;
+}
+.search-title {
+  display: flex;
+  align-items: flex-end;
+}
+.search-title p {
+  margin-left: 10px;
+}
+.search-form {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.search-div {
+  display: flex;
+  flex-direction: column;
+}
+.search-term label {
+  margin-left: 5px;
+}
+
 /* RECIPE INDEX */
 .recipe-container {
   width: 90%;
@@ -406,6 +432,7 @@ footer {
 }
 .underline {
   text-decoration: underline;
+  cursor: pointer;
 }
 .list-edit-form {
   align-items: center;
