@@ -29,6 +29,7 @@ const Header = (props: Props): JSX.Element => {
     )
     const loginLinks = (
         <>
+            <Link className="nav-link" to="/recipes">Recipes</Link>
             <p className="nav-link" onClick={props.showLogin}>Login</p>
             <LoginModal 
                 display={props.displayLoginModal} 

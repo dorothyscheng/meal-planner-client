@@ -11,10 +11,15 @@ interface QueryProperties {
     [key: string]: boolean,
 }
 
-interface Props extends RouteComponentProps {
+interface LocationProps {
+    querySearch?: string,
+    parameter?: string,
+    query?: string,
+}
+
+interface Props extends RouteComponentProps<{}, any, LocationProps | any> {
     lists: List[] | null,
     handleUpdateList: (list: List) => void,
-    querySearchProp?: string,
 }
 
 interface State {
@@ -86,7 +91,6 @@ class RecipeContainer extends React.Component<Props, State> {
     fetchRecipeQuery = (query: string): void => {
         RecipeModel.querySearch(query)
             .then(response => {
-                console.log(response);
                 if (response.count <=20) {
                     this.setState({
                         recipes: response.hits,
@@ -168,7 +172,8 @@ class RecipeContainer extends React.Component<Props, State> {
                 queryArr.push(`cuisineType=${property}`);
             }
         };
-        this.fetchRecipeQuery(queryArr.join('&'));
+        const query = queryArr.join('&');
+        this.fetchRecipeQuery(query);
     }
 
     handleQuerySearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -218,10 +223,29 @@ class RecipeContainer extends React.Component<Props, State> {
     }
 
     componentDidMount() {
-        const query = this.props.location.search.slice(1);
-        if (query) {
-            this.fetchRecipeQuery(query);
-        }
+        if (this.props.location.state && this.props.location.state.querySearch) {
+            this.fetchRecipeQuery(this.props.location.state.querySearch);
+            switch (this.props.location.state.parameter) {
+                case ('mealType'):
+                    let stateMealProperties: QueryProperties = {...this.state.mealProperties, [this.props.location.state.query]: true}
+                    this.setState({
+                        mealProperties: stateMealProperties,
+                    });
+                    break;
+                case ('health'):
+                    let stateHealthProperties: QueryProperties = {...this.state.healthProperties, [this.props.location.state.query]: true}
+                    this.setState({
+                        healthProperties: stateHealthProperties,
+                    });
+                    break;
+                case ('cuisineType'):
+                    let stateCuisineTypeProperties: QueryProperties = {...this.state.cuisineTypeProperties, [this.props.location.state.query]: true}
+                    this.setState({
+                        cuisineTypeProperties: stateCuisineTypeProperties,
+                    });
+                    break;
+            };
+        };
     }
 
     render(): JSX.Element {

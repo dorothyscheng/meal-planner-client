@@ -8,12 +8,18 @@ interface queryOption {
 }
 
 const QueryCard = (props: queryOption): JSX.Element => {
-    const link = '/recipes?' + props.parameter + '=' + props.query + '&health=alcohol-free';
     const style: CSS.Properties = {
         backgroundImage: `url(${props.image})`,
     }
     return (
-        <Link className="query-card-link" to={link}>
+        <Link className="query-card-link" to={{
+            pathname: '/recipes',
+            state: {
+                querySearch: `${props.parameter}=${props.query}`,
+                parameter: props.parameter,
+                query: props.query,
+            }
+        }}>
             <div className="query-container">
                 <div className="card query-card" style={style}>
                     <h2 className="query-title">{props.query.toUpperCase()}</h2>
