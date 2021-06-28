@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Redirect } from 'react-router-dom';
 
 import Routes from './config/Routes';
 import User, { UserLogin } from './models/User.interface';
@@ -25,6 +25,7 @@ interface State {
    updateMessage: string | null,
    updatedWeek: Week | null,
    updatedList: List | null,
+   redirectToDash: boolean,
 }
 
 class App extends React.Component<{}, State> {
@@ -36,6 +37,7 @@ class App extends React.Component<{}, State> {
     updateMessage: null,
     updatedWeek: null,
     updatedList: null,
+    redirectToDash: false,
   }
 
   isError = (response: errorMessage | User): response is errorMessage => {
@@ -70,9 +72,11 @@ class App extends React.Component<{}, State> {
             loginSignupError: response.message,
           });
         } else {
-          this.handleLogin({
-            username: response.username,
-            password: response.password,
+          localStorage.setItem('auth', response.username);
+          this.fetchUserData(response.username);
+          this.setState({
+            redirectToDash: true,
+            displaySignupModal: false,
           });
         };
       });
@@ -101,6 +105,7 @@ class App extends React.Component<{}, State> {
           this.setState({
             user: response,
             loginSignupError: null,
+            redirectToDash: true,
           });
           localStorage.setItem('auth', response.username);
           this.hideLogin();
@@ -112,7 +117,14 @@ class App extends React.Component<{}, State> {
     localStorage.clear();
     this.setState({
       user: null,
+      redirectToDash: false,
     });
+  }
+
+  resetRedirect = (): void => {
+    this.setState({
+      redirectToDash: false,
+    })
   }
 
   handleUserEdit = (username: User['username'], user: User): void => {
@@ -143,6 +155,7 @@ class App extends React.Component<{}, State> {
           this.setState({
             user: null,
             updateMessage: null,
+            redirectToDash: false,
           });
           localStorage.clear();
         };
@@ -340,7 +353,9 @@ class App extends React.Component<{}, State> {
               handleUpdateWeek={this.handleUpdateWeek}
               handleDeleteWeek={this.handleDeleteWeek}
               updatedWeek={this.state.updatedWeek}
-              updatedList={this.state.updatedList} />
+              updatedList={this.state.updatedList}
+              redirectToDash={this.state.redirectToDash}
+              resetRedirect={this.resetRedirect} />
           </Router>
         </div>
         <Footer />

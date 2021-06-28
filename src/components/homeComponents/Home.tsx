@@ -1,3 +1,4 @@
+import { Redirect } from 'react-router-dom';
 import QueryCard from './QueryCard';
 
 interface queryOption {
@@ -6,7 +7,16 @@ interface queryOption {
     image: string,
 }
 
-const Home = (): JSX.Element => {
+interface Props {
+    redirectToDash: boolean,
+    resetRedirect: () => void,
+}
+
+const Home = (props: Props): JSX.Element => {
+    if (props.redirectToDash) {
+        props.resetRedirect();
+        return <Redirect to="/dashboard" />
+    };
     const queryOptions: queryOption[] = [
         {parameter: 'mealType', query: 'dinner', image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'},
         {parameter: 'health', query: 'dairy-free', image: 'https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&q=80'},

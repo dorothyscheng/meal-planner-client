@@ -24,6 +24,8 @@ interface Props {
   handleDeleteWeek: (week: Week) => void,
   updatedWeek: Week | null,
   updatedList: List | null,
+  redirectToDash: boolean,
+  resetRedirect: () => void,
 }
 
 const Routes = (props: Props): JSX.Element => {
@@ -51,7 +53,7 @@ const Routes = (props: Props): JSX.Element => {
   )
     return (
       <Switch>
-        <Route exact path='/' component={ Home } />
+        <Route exact path='/' render={() => <Home redirectToDash={props.redirectToDash} resetRedirect={props.resetRedirect} />} />
         <Route exact path='/recipes/:id' render={(props) => <RecipeShow 
           {...props} 
           lists={user && user.lists ? user.lists : null}
