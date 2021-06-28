@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import QueryCard from './QueryCard';
 
@@ -13,10 +14,16 @@ interface Props {
 }
 
 const Home = (props: Props): JSX.Element => {
+    useEffect(() => {
+        if (props.redirectToDash) {
+            props.resetRedirect();
+        };
+    });
+
     if (props.redirectToDash) {
-        props.resetRedirect();
         return <Redirect to="/dashboard" />
     };
+    
     const queryOptions: queryOption[] = [
         {parameter: 'mealType', query: 'dinner', image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80'},
         {parameter: 'health', query: 'dairy-free', image: 'https://images.unsplash.com/photo-1623428187969-5da2dcea5ebf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=700&q=80'},
@@ -44,10 +51,6 @@ const Home = (props: Props): JSX.Element => {
             <h2 className="section-title">Browse our recipes</h2>
             <div className="card-container">
                 { queryCards }
-            </div>
-            <h2 className="section-title">Another section</h2>
-            <div className="home-text final-section">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc nec consequat diam, quis efficitur eros. Nullam massa tortor, ultricies eget massa ac, molestie vestibulum orci. Ut semper justo ut mattis vulputate. Duis id iaculis nulla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris nec aliquam tellus. Vivamus pellentesque felis odio, vel cursus nulla malesuada non. Fusce volutpat, ligula et mattis posuere, dui tellus vehicula nulla, id cursus lacus tellus vel neque. Phasellus quis nisl vitae erat dapibus ornare. Donec pharetra feugiat leo, sit amet gravida massa feugiat quis. Nam ornare luctus volutpat. Morbi tristique velit non ligula laoreet iaculis. Aenean egestas molestie urna. Ut suscipit ligula placerat nunc placerat gravida. Phasellus hendrerit urna in neque bibendum placerat. Donec mattis, arcu id malesuada finibus, nunc elit elementum enim, a sagittis orci nisi ac nisl.
             </div>
         </>
     );

@@ -2,7 +2,7 @@ import axios, { AxiosResponse, AxiosError } from 'axios';
 
 import List from './List.interface';
 
-const endPoint = 'http://localhost:4000/api/v1/lists';
+const endPoint = 'https://meal-plan-api.herokuapp.com/api/v1/lists';
 
 interface errorMessage {
     message: string,

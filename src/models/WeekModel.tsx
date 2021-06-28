@@ -2,7 +2,7 @@ import axios, { AxiosResponse, AxiosError } from 'axios';
 
 import Week from './Week.interface';
 
-const endPoint = 'http://localhost:4000/api/v1/weeks';
+const endPoint = 'https://meal-plan-api.herokuapp.com/api/v1/weeks';
 
 interface errorMessage {
     message: string,

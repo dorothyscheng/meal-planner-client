@@ -2,7 +2,7 @@ import axios, { AxiosResponse, AxiosError } from 'axios';
 
 import User, { UserLogin } from './User.interface';
 
-const endPoint = 'http://localhost:4000/api/v1/users';
+const endPoint='https://meal-plan-api.herokuapp.com/api/v1/users';
 
 interface errorMessage {
     message: string,

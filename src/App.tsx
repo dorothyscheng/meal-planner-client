@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import Routes from './config/Routes';
 import User, { UserLogin } from './models/User.interface';
